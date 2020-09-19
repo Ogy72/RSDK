@@ -11,9 +11,9 @@ class obat extends Model
     protected $primaryKey = 'kd_obat';
     protected $keyType = 'string';
     public $incrementing = false;
-    protected $fillable = ['kd_obat', 'nm_obat', 'satuan', 'expired', 'stok', 'harga'];
+    protected $fillable = ['kd_obat', 'nm_obat', 'satuan_id', 'expired', 'stok', 'harga'];
 
     public function satuan(){
-        return $this->hasOne('App\Satuan');
+        return $this->belongsTo('App\Satuan');
     }
 }

@@ -47,8 +47,8 @@
                                 <th width="15%">Expired</th>
                                 <th width="5%">Satuan</th>
                                 <th width="5%">isi</th>
+                                <th width="13%" class="text-center">Harga</th>
                                 <th width="5%">Stok</th>
-                                <th width="13%">Harga</th>
                                 <th width="12%">Option</th>
                             </tr>
                         </thead>
@@ -60,10 +60,10 @@
                                 <td>{{ $o->kd_obat }}</td>
                                 <td>{{ $o->nm_obat }}</td>
                                 <td>{{ $o->expired }}</td>
-                                <td>{{ $o->satuan->satuan }}</td>
+                                <td>{{ $o->satuan->satuan}}</td>
                                 <td>{{ $o->satuan->isi_satuan }}</td>
+                                <td class="text-center">{{ $o->harga }}</td>
                                 <td>{{ $o->stok }}</td>
-                                <td>{{ $o->harga }}</td>
                                 <td>
                                     <a href="/data-obat/edit/{{ $o->kd_obat }}" class="btn btn-sm btn-light fas fa-edit"></a>
                                     <a href="/data-obat/hapus/{{ $o->kd_obat }}" class="btn btn-sm btn-light fas fa-trash" onclick="return confirm('Hapus Data ini?')"></a>

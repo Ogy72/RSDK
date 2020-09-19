@@ -1,5 +1,5 @@
 <head>
-    <title>Input Data Obat</title>
+    <title>Edit Data Obat</title>
 </head>
 @extends('layout.HalamanUtama')
 <!-- ============================================================== -->
@@ -9,7 +9,7 @@
 <div class="row">
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="page-header">
-            <h2 class="pageheader-title">Input Data Obat</h2>
+            <h2 class="pageheader-title">Edit Data Obat</h2>
         </div>
     </div>
 </div>
@@ -43,20 +43,19 @@
                     <div class="form-row">
                         <div class="form-group col-4">
                             <label for="kode">Kode Obat</label>
-                            <input type="text" name="kd_obat" class="form-control" placeholder="Masukkan Kode Obat" required value="{{ old('kode_obat') }}">
+                            <input type="text" name="kd_obat" class="form-control" placeholder="Masukkan Kode Obat" required value="{{ $obat->kd_obat }}">
                         </div>
                         <div class="form-group col-8">
                             <label for="obat">Nama Obat</label>
-                            <input type="text" name="nama_obat" class="form-control" placeholder="Masukkan Nama Obat" required value="{{ old('nama_obat') }}">
+                            <input type="text" name="nama_obat" class="form-control" placeholder="Masukkan Nama Obat" required value="{{ $obat->nm_obat }}">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-2">
                             <label for="satuan">Satuan</label>
                             <select name="satuan"  class="form-control form-control-sm" required>
-                                <option value="">Pilih Satuan</option>
                                 @foreach($satuan as $s)
-                                    @if(old('satuan') == $s->id)
+                                    @if($obat->satuan_id == $s->id)
                                         <option value="{{ $s->id }}" selected>{{ $s->satuan }} (isi {{ $s->isi_satuan}})</option>
                                     @else
                                         <option value="{{ $s->id }}">{{ $s->satuan }} (isi {{ $s->isi_satuan}})</option>
@@ -66,19 +65,19 @@
                         </div>
                         <div class="form-group col-2">
                             <label for="stok">Stok Dalam Satuan</label>
-                            <input type="text" name="stok" class="form-control" placeholder="Masukkan Stok" required value="{{ old('stok') }}">
+                            <input type="text" name="stok" class="form-control" placeholder="Masukkan Stok" required value="{{ $stok }}">
                         </div>
                         <div class="form-group col-2">
                             <label for="non_stok">Stok Diluar Satuan</label>
-                            <input type="text" name="non_stok" class="form-control" placeholder="Masukkan Stok" value="{{ old('non_stok') }}">
+                            <input type="text" name="non_stok" class="form-control" placeholder="Masukkan Stok" value="{{ $non_stok }}">
                         </div>
                         <div class="form-group col-3">
                             <label for="expired">Tanggal Kadaluarsa</label>
-                            <input type="date" name="expired" class="form-control" required value="{{ old('expired') }}">
+                            <input type="date" name="expired" class="form-control" required value="{{ $obat->expired }}">
                         </div>
                         <div class="form-group col-3">
                             <label for="harga">Harga Obat</label>
-                            <input type="text" name="harga" class="form-control" placeholder="Masukkan Harga Obat" required value="{{ old('harga') }}">
+                            <input type="text" name="harga" class="form-control" placeholder="Masukkan Harga Obat" required value="{{ $obat->harga }}">
                         </div>
                     </div>
                     <div class="form-row mt-2">
