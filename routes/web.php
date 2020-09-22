@@ -78,3 +78,13 @@ Route::get('/data-obat/search', 'ObatController@search');
 Route::get('/data-obat/edit/{kd_obat}', 'ObatController@edit');
 Route::put('/data-obat/update/{kd_obat}', 'ObatController@update');
 Route::get('/data-obat/hapus/{kd_obat}', 'ObatController@destroy');
+
+//Route data bahan habis pakai
+
+Route::get('/data-bahan', 'BahanPakaiController@view');
+Route::get('/data-bahan/add', 'BahanPakaiController@add');
+Route::post('/data-bahan/store', 'BahanPakaiController@store');
+Route::get('/data-bahan/search', 'BahanPakaiController@search');
+Route::get('/data-bahan/edit/{id}', 'BahanPakaiController@edit');
+Route::put('/data-bahan/update/{id}', 'BahanPakaiController@update');
+Route::get('/data-bahan/hapus/{id}', 'BahanPakaiController@destroy');

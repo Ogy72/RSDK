@@ -83,7 +83,7 @@
                                             <a class="nav-link" href="/data-obat">Data Obat</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/data-pakai">Bahan Pakai</a>
+                                            <a class="nav-link" href="/data-bahan">Bahan Pakai</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="/data-satuan">Data Satuan</a>
