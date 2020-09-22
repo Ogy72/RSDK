@@ -81,12 +81,44 @@ class ObatController extends Controller
     }
 
     //Menampilkan Form Edit
-    public function edit($id){
-        $obat = Obat::find($id);
+    public function edit($kd_obat){
+        $obat = Obat::find($kd_obat);
         $satuan = Satuan::orderBy('satuan', 'ASC')->get();
         $stok = $this->konversiStok($obat->stok, $obat->satuan_id);
         $non_stok = $this->konversiNonStok($obat->stok, $obat->satuan_id);
 
         return view('data-obat.FormEdit', compact('obat', 'satuan', 'stok', 'non_stok'));
+    }
+
+    //Update Data Obat
+    public function update($kd_obat, Request $request){
+        $this->validate($request, [
+            'stok' => 'required|numeric',
+            'non_stok' => 'numeric',
+            'harga' => 'required|numeric'
+        ]);
+
+        $real_stok = $this->hitungStok($request->satuan, $request->stok, $request->non_stok);
+
+        $obat = Obat::find($kd_obat);
+        $obat->kd_obat = $request->kd_obat;
+        $obat->nm_obat = $request->nama_obat;
+        $obat->satuan_id = $request->satuan;
+        $obat->stok = $real_stok;
+        $obat->expired = $request->expired;
+        $obat->harga = $request->harga;
+        $obat->save();
+
+        Alert::toast('Data Berhasil Diubah', 'success');
+        return redirect('/data-obat');
+    }
+
+    //Destroy Data Obat
+    public function destroy($kd_obat){
+        $obat = Obat::find($kd_obat);
+        $obat->delete();
+
+        Alert::toast('Data Obat Berhasil Di Hapus', 'success');
+        return back();
     }
 }

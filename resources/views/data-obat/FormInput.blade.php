@@ -43,7 +43,7 @@
                     <div class="form-row">
                         <div class="form-group col-4">
                             <label for="kode">Kode Obat</label>
-                            <input type="text" name="kd_obat" class="form-control" placeholder="Masukkan Kode Obat" required value="{{ old('kode_obat') }}">
+                            <input type="text" name="kd_obat" class="form-control" placeholder="Masukkan Kode Obat" required value="{{ old('kd_obat') }}">
                         </div>
                         <div class="form-group col-8">
                             <label for="obat">Nama Obat</label>

@@ -38,8 +38,9 @@
             </div>
 
             <div class="card-body">
-                <form action="/data-obat/store" method="post">
+                <form action="/data-obat/update/{{ $obat->kd_obat }}" method="post">
                     @csrf
+                    @method('PUT')
                     <div class="form-row">
                         <div class="form-group col-4">
                             <label for="kode">Kode Obat</label>
