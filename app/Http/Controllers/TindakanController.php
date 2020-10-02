@@ -7,20 +7,31 @@ use Alert;
 use App\BiayaTindakan;
 use App\Dokter;
 use App\Perawat;
+use Illuminate\Support\Facades\Gate;
 
 class TindakanController extends Controller
 {
-    //Menampilkan Data Tindakan
+      //Autentifikasi
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+   //Menampilkan Data Tindakan
     public function view(){
-        $tindakan = BiayaTindakan::orderBy('updated_at', 'DESC')->paginate(5);
-        return view('data-tindakan.ViewTindakan', compact('tindakan'));
+        if(Gate::authorize('isAdmin')){
+            $tindakan = BiayaTindakan::orderBy('updated_at', 'DESC')->paginate(5);
+            return view('data-tindakan.ViewTindakan', compact('tindakan'));
+        }
     }
 
     //Menampilkan Form Input
     public function add(){
-        $dokter = Dokter::all();
-        $perawat = Perawat::all();
-        return view('data-tindakan.FormInput', compact('dokter', 'perawat'));
+        if(Gate::authorize('isAdmin')){
+            $dokter = Dokter::all();
+            $perawat = Perawat::all();
+            return view('data-tindakan.FormInput', compact('dokter', 'perawat'));
+        }
     }
 
     //Menyimpan Data Tindakan
@@ -51,10 +62,12 @@ class TindakanController extends Controller
 
     //Menampilkan Form Edit
     public function edit($id){
-        $tindakan = BiayaTindakan::find($id);
-        $dokter = Dokter::all();
-        $perawat = Perawat::all();
-        return view('data-tindakan.FormEdit', compact('tindakan', 'dokter', 'perawat'));
+        if(Gate::authorize('isAdmin')){
+            $tindakan = BiayaTindakan::find($id);
+            $dokter = Dokter::all();
+            $perawat = Perawat::all();
+            return view('data-tindakan.FormEdit', compact('tindakan', 'dokter', 'perawat'));
+        }
     }
 
     //Update Data Tindakan

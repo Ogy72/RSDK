@@ -18,9 +18,9 @@ use Illuminate\Support\Facades\Route;
 //    return view('welcome');
 //});
 
-//Route ke halaman utama
+//Route ke halaman login
 Route::get('/', function(){
-    return view('layout.HalamanUtama');
+    return redirect('login');
 });
 
 //Route data dokter
@@ -88,3 +88,6 @@ Route::get('/data-bahan/search', 'BahanPakaiController@search');
 Route::get('/data-bahan/edit/{id}', 'BahanPakaiController@edit');
 Route::put('/data-bahan/update/{id}', 'BahanPakaiController@update');
 Route::get('/data-bahan/hapus/{id}', 'BahanPakaiController@destroy');
+
+Auth::routes();
+

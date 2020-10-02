@@ -6,19 +6,30 @@ use Illuminate\Http\Request;
 use App\Obat;
 use App\Satuan;
 use Alert;
+use Illuminate\Support\Facades\Gate;
 
 class ObatController extends Controller
 {
-    //Menampilkan Data Obat
+   //Autentifikasi
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+   //Menampilkan Data Obat
     public function view(){
-        $obat = Obat::orderBy('updated_at', 'DESC')->paginate(5);
-        return view('data-obat.ViewObat', compact('obat'));
+        if(Gate::authorize('isAdmin')){
+            $obat = Obat::orderBy('updated_at', 'DESC')->paginate(5);
+            return view('data-obat.ViewObat', compact('obat'));
+        }
     }
 
     //Menampilan Form Input
     public function add(){
-        $satuan = Satuan::orderBy('satuan', 'ASC')->get();
-        return view('data-obat.FormInput', compact('satuan'));
+        if(Gate::authorize('isAdmin')){
+            $satuan = Satuan::orderBy('satuan', 'ASC')->get();
+            return view('data-obat.FormInput', compact('satuan'));
+        }
     }
 
     //Menyimpan Data Obat
@@ -82,12 +93,14 @@ class ObatController extends Controller
 
     //Menampilkan Form Edit
     public function edit($kd_obat){
-        $obat = Obat::find($kd_obat);
-        $satuan = Satuan::orderBy('satuan', 'ASC')->get();
-        $stok = $this->konversiStok($obat->stok, $obat->satuan_id);
-        $non_stok = $this->konversiNonStok($obat->stok, $obat->satuan_id);
+        if(Gate::authorize('isAdmin')){
+            $obat = Obat::find($kd_obat);
+            $satuan = Satuan::orderBy('satuan', 'ASC')->get();
+            $stok = $this->konversiStok($obat->stok, $obat->satuan_id);
+            $non_stok = $this->konversiNonStok($obat->stok, $obat->satuan_id);
 
-        return view('data-obat.FormEdit', compact('obat', 'satuan', 'stok', 'non_stok'));
+            return view('data-obat.FormEdit', compact('obat', 'satuan', 'stok', 'non_stok'));
+        }
     }
 
     //Update Data Obat

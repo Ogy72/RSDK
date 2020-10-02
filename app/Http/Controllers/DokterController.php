@@ -5,18 +5,31 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Alert;
 use App\Dokter;
+use Illuminate\Support\Facades\Gate;
 
 class DokterController extends Controller
 {
+
+    //Autentifikasi
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     //Menampilkan Data Dokter
     public function View(){
-        $dokter = Dokter::orderBy('updated_at', 'DESC')->paginate(5);
-        return view('data-dokter.ViewDokter', ['dokter' => $dokter]);
+        if(Gate::authorize('isAdmin')){
+            $dokter = Dokter::orderBy('updated_at', 'DESC')->paginate(5);
+            return view('data-dokter.ViewDokter', ['dokter' => $dokter]);
+        }
     }
 
     //Menampilkan Form Input Dokter
     public function add(){
-        return view('data-dokter.FormInput');
+        if(Gate::authorize('isAdmin')){
+            return view('data-dokter.FormInput');
+        }
     }
 
     //Menyimpan Data Dokter
@@ -50,14 +63,18 @@ class DokterController extends Controller
 
     //Menampilkan Detail Data Dokter
     public function info($nid){
-        $dokter = Dokter::find($nid);
-        return view('data-dokter.FormInfo', ['dokter' => $dokter]);
+        if(Gate::authorize('isAdmin')){
+            $dokter = Dokter::find($nid);
+            return view('data-dokter.FormInfo', ['dokter' => $dokter]);
+        }
     }
 
     //Menampilkan Form Edit
     public function edit($nid){
-        $dokter = Dokter::find($nid);
-        return view('data-dokter.FormEdit', ['dokter' => $dokter]);
+        if(Gate::authorize('isAdmin')){
+            $dokter = Dokter::find($nid);
+            return view('data-dokter.FormEdit', ['dokter' => $dokter]);
+        }
     }
 
     //Update Data Dokter

@@ -5,18 +5,29 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\BahanPakai;
 use Alert;
+use Illuminate\Support\Facades\Gate;
 
 class BahanPakaiController extends Controller
 {
+    //Autentifikasi
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     //Menampilkan Data Bahan Habis Pakai
     public function view(){
-        $bahan = BahanPakai::orderBy('updated_at', 'DESC')->paginate(5);
-        return view('data-bahan.ViewBahan', compact('bahan'));
+        if(Gate::authorize('isAdmin')){
+            $bahan = BahanPakai::orderBy('updated_at', 'DESC')->paginate(5);
+            return view('data-bahan.ViewBahan', compact('bahan'));
+        }
     }
 
     //Menampilkan Form Input
     public function add(){
-        return view('data-bahan.FormInput');
+        if(Gate::authorize('isAdmin')){
+            return view('data-bahan.FormInput');
+        }
     }
 
     //Menyimpan Data Ke Dalam Table
@@ -43,8 +54,10 @@ class BahanPakaiController extends Controller
 
     //Menampilkan Form Edit
     public function edit($id){
-        $bahan = BahanPakai::find($id);
-        return view('data-bahan.FormEdit', compact('bahan'));
+        if(Gate::authorize('isAdmin')){
+            $bahan = BahanPakai::find($id);
+            return view('data-bahan.FormEdit', compact('bahan'));
+        }
     }
 
     //Update Data

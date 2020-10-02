@@ -5,18 +5,29 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Satuan;
 use Alert;
+use Illuminate\Support\Facades\Gate;
 
 class SatuanController extends Controller
 {
-    //Menampilkan Data Satuan
+     //Autentifikasi
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+   //Menampilkan Data Satuan
     public function view(){
-        $satuan = Satuan::orderBy('updated_at', 'DESC')->paginate(5);
-        return view('data-satuan.ViewSatuan', compact('satuan'));
+        if(Gate::authorize('isAdmin')){
+            $satuan = Satuan::orderBy('updated_at', 'DESC')->paginate(5);
+            return view('data-satuan.ViewSatuan', compact('satuan'));
+        }
     }
 
     //Menampilkan Form Input
     public function add(){
-        return view('data-satuan.FormInput');
+        if(Gate::authorize('isAdmin')){
+            return view('data-satuan.FormInput');
+        }
     }
 
     //Menyimpan Data Satuan
@@ -46,8 +57,10 @@ class SatuanController extends Controller
 
     //Menampilkan Form Edit
     public function edit($id){
-        $satuan = Satuan::find($id);
-        return view('data-satuan.FormEdit', compact('satuan'));
+        if(Gate::authorize('isAdmin')){
+            $satuan = Satuan::find($id);
+            return view('data-satuan.FormEdit', compact('satuan'));
+        }
     }
 
     //Update Data Satuan

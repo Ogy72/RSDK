@@ -5,18 +5,29 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Penyakit;
 use Alert;
+use Illuminate\Support\Facades\Gate;
 
 class PenyakitController extends Controller
 {
-    //Menampilkan Data Penyakit
+    //Autentifikasi
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+   //Menampilkan Data Penyakit
     public function view(){
-        $penyakit = Penyakit::orderBy('updated_at', 'DESC')->paginate(5);
-        return view('data-penyakit.ViewPenyakit', compact('penyakit'));
+        if(Gate::authorize('isAdmin')){
+            $penyakit = Penyakit::orderBy('updated_at', 'DESC')->paginate(5);
+            return view('data-penyakit.ViewPenyakit', compact('penyakit'));
+        }
     }
 
     //Menampilkan Form Input
     public function add(){
-        return view('data-penyakit.FormInput');
+        if(Gate::authorize('isAdmin')){
+            return view('data-penyakit.FormInput');
+        }
     }
 
     //Menyimpan Data Penyakit
@@ -47,8 +58,10 @@ class PenyakitController extends Controller
 
     //Menampilkan Form Edit
     public function edit($id){
-        $penyakit = Penyakit::find($id);
-        return view('data-penyakit.FormEdit', compact('penyakit'));
+        if(Gate::authorize('isAdmin')){
+            $penyakit = Penyakit::find($id);
+            return view('data-penyakit.FormEdit', compact('penyakit'));
+        }
     }
 
     //Update Data Penyakit

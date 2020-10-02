@@ -5,19 +5,29 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Alert;
 use App\Perawat;
+use Illuminate\Support\Facades\Gate;
 
 class PerawatController extends Controller
 {
-    //
+    //Autentifikasi
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     //Menampilkan Data Perawat
     public function view(){
-        $perawat = Perawat::orderBy('updated_at', 'DESC')->paginate(5);
-        return view('data-perawat.ViewPerawat', ['perawat' => $perawat]);
+        if(Gate::authorize('isAdmin')){
+            $perawat = Perawat::orderBy('updated_at', 'DESC')->paginate(5);
+            return view('data-perawat.ViewPerawat', ['perawat' => $perawat]);
+        }
     }
 
     //Menampilkan Form Input Perawat
     public function add(){
-        return view('data-perawat.FormInput');
+        if(Gate::authorize('isAdmin')){
+            return view('data-perawat.FormInput');
+        }
     }
 
     //Menyimpan Data Perawat
@@ -51,14 +61,18 @@ class PerawatController extends Controller
 
     //Menampilkan Info Perawat
     public function info($nip){
-        $perawat = Perawat::find($nip);
-        return view('data-perawat.FormInfo', ['perawat' => $perawat]);
+        if(Gate::authorize('isAdmin')){
+            $perawat = Perawat::find($nip);
+            return view('data-perawat.FormInfo', ['perawat' => $perawat]);
+        }
     }
 
     //Menampilkan Form Edit
     public function edit($nip){
-        $perawat = Perawat::find($nip);
-        return view('data-perawat.FormEdit', ['perawat' =>$perawat]);
+        if(Gate::authorize('isAdmin')){
+            $perawat = Perawat::find($nip);
+            return view('data-perawat.FormEdit', ['perawat' =>$perawat]);
+        }
     }
 
     //Update Data Perawat
