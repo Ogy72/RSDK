@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Gate;
 
 class SatuanController extends Controller
 {
-     //Autentifikasi
+    //Autentifikasi
     public function __construct()
     {
         $this->middleware('auth');

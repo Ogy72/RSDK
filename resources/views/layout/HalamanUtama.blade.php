@@ -99,7 +99,7 @@
                                             <a class="nav-link" href="/data-satuan">Data Satuan</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('register') }}">Data Users</a>
+                                            <a class="nav-link" href="/data-user">Data Users</a>
                                         </li>
                                     </ul>
                                 </div>

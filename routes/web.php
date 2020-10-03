@@ -80,7 +80,6 @@ Route::put('/data-obat/update/{kd_obat}', 'ObatController@update');
 Route::get('/data-obat/hapus/{kd_obat}', 'ObatController@destroy');
 
 //Route data bahan habis pakai
-
 Route::get('/data-bahan', 'BahanPakaiController@view');
 Route::get('/data-bahan/add', 'BahanPakaiController@add');
 Route::post('/data-bahan/store', 'BahanPakaiController@store');
@@ -88,6 +87,13 @@ Route::get('/data-bahan/search', 'BahanPakaiController@search');
 Route::get('/data-bahan/edit/{id}', 'BahanPakaiController@edit');
 Route::put('/data-bahan/update/{id}', 'BahanPakaiController@update');
 Route::get('/data-bahan/hapus/{id}', 'BahanPakaiController@destroy');
+
+//Route data user
+Route::get('/data-user', 'UserController@view');
+Route::get('/data-user/add', 'UserController@add');
+Route::post('/data-user/store', 'UserController@store');
+Route::get('/data-user/reset/{id}', 'UserController@reset');
+Route::put('/data-user/update/{id}', 'UserController@update');
 
 Auth::routes();
 
