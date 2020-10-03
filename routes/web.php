@@ -94,6 +94,7 @@ Route::get('/data-user/add', 'UserController@add');
 Route::post('/data-user/store', 'UserController@store');
 Route::get('/data-user/reset/{id}', 'UserController@reset');
 Route::put('/data-user/update/{id}', 'UserController@update');
+Route::get('/data-user/hapus/{id}', 'UserController@destroy');
 
 Auth::routes();
 

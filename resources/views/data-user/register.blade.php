@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>
 
-                <div class="card-body">
+                <div class="card-body pb-0 pt-0">
                     <form method="POST" action="/data-user/store">
                         @csrf
                         <div class="form-group row">

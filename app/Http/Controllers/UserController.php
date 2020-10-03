@@ -97,4 +97,13 @@ class UserController extends Controller
         return [];
     }
 
+    //Hapus user
+    public function destroy($id){
+        $user = User::find($id);
+        $user->delete();
+
+        Alert::toast('Data User Berhasil Dihapus', 'success');
+        return back();
+    }
+
 }

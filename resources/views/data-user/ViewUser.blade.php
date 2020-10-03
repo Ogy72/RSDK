@@ -27,7 +27,7 @@
                     </div>
                     <div class="col-4"></div>
                     <div class="col-3 pl-5">
-                        <a href="/data-user/add" class="btn btn-primary btn-sm ml-3"><i class="fas fa-user-md"></i> Tambah Data User</a>
+                        <a href="/data-user/add" class="btn btn-primary btn-sm ml-3"><i class="fas fa-id-card"></i> Tambah Data User</a>
                     </div>
                 </div>
             </div><!--end card header-->
@@ -38,11 +38,11 @@
                         <thead class="thead-dark">
                             <tr>
                                 <th width="5%">No</th>
-                                <th width="27%">Nama</th>
+                                <th width="26%">Nama</th>
                                 <th width="15%">Username</th>
                                 <th width="19%">Level</th>
                                 <th width="15%">No Telepon</th>
-                                <th width="19%">Option</th>
+                                <th width="20%">Option</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -55,7 +55,7 @@
                                 <td>{{ $u->level }}</td>
                                 <td>{{ $u->no_telp }}</td>
                                 <td>
-                                    <a href="/data-user/reset/{{ $u->id }}" class="btn btn-sm btn-light fas fa-edit">Reset Pass</a>
+                                    <a href="/data-user/reset/{{ $u->id }}" class="btn btn-sm btn-light text-danger">Reset Password</a>
                                     <a href="/data-user/hapus/{{ $u->id }}" class="btn btn-sm btn-light fas fa-trash" onclick="return confirm('Hapus Data ini?')"></a>
                                 </td>
                             </tr>
