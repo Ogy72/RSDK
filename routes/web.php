@@ -96,5 +96,15 @@ Route::get('/data-user/reset/{id}', 'UserController@reset');
 Route::put('/data-user/update/{id}', 'UserController@update');
 Route::get('/data-user/hapus/{id}', 'UserController@destroy');
 
+//Route data pasien
+Route::get('/data-pasien', 'PasienController@view');
+Route::get('/data-pasien/add', 'PasienController@add');
+Route::post('/data-pasien/store', 'PasienController@store');
+Route::get('/data-pasien/search', 'PasienController@search');
+Route::get('/data-pasien/info/{nip}', 'PasienController@info');
+Route::get('/data-pasien/edit/{nik}', 'PasienController@edit');
+Route::put('/data-pasien/update/{nik}', 'PasienController@update');
+Route::get('/data-pasien/hapus/{nik}', 'PasienController@destroy');
+
 Auth::routes();
 

@@ -21,8 +21,8 @@ class RedirectIfAuthenticated
     {
         if (Auth::guard($guard)->check()) {
             //return redirect(RouteServiceProvider::HOME);
-            if(Gate::allows('isAdmin')) {
-                return redirect('/data-dokter');
+            if(Gate::allows('isAdminRm')) {
+                return redirect('/data-pasien');
             } else {
                 return redirect('/data-obat');
             }
