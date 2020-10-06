@@ -105,7 +105,7 @@
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="data-pasien"><i class="fa fa-fw fa-user"></i>Pasien</a>
+                                <a class="nav-link" href="/data-pasien"><i class="fa fa-fw fa-user"></i>Pasien</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#"><i class="fas fa-fw fa-clipboard"></i>Rekam Medis</a>

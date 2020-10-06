@@ -101,7 +101,7 @@ Route::get('/data-pasien', 'PasienController@view');
 Route::get('/data-pasien/add', 'PasienController@add');
 Route::post('/data-pasien/store', 'PasienController@store');
 Route::get('/data-pasien/search', 'PasienController@search');
-Route::get('/data-pasien/info/{nip}', 'PasienController@info');
+Route::get('/data-pasien/info/{nik}', 'PasienController@info');
 Route::get('/data-pasien/edit/{nik}', 'PasienController@edit');
 Route::put('/data-pasien/update/{nik}', 'PasienController@update');
 Route::get('/data-pasien/hapus/{nik}', 'PasienController@destroy');

@@ -49,20 +49,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @php $no = 1; @endphp
                         @foreach ($pasien as $p)
                             <tr>
-                                <td>@php echo $no; @endphp </td>
+                                <td>{{ $p->no_rm}} </td>
                                 <td>{{ $p->nama }}</td>
                                 <td>{{ $p->jk }}</td>
                                 <td>{{ $p->no_telp }}</td>
                                 <td>
                                     <a href="/data-pasien/edit/{{ $p->nik }}" class="btn btn-sm btn-light fas fa-edit"></a>
-                                    <a href="/data-dokter/edit/{{ $p->nik }}" class="btn btn-sm btn-light fas fa-trash" onclick="return confirm('Hapus Data ini?')"></a>
-                                    <a href="/data-dokter/info/{{ $p->nik }}" class="btn btn-sm btn-light fas fa-info-circle"></a>
+                                    <a href="/data-pasien/edit/{{ $p->nik }}" class="btn btn-sm btn-light fas fa-trash" onclick="return confirm('Hapus Data ini?')"></a>
+                                    <a href="/data-pasien/info/{{ $p->nik }}" class="btn btn-sm btn-light fas fa-info-circle"></a>
                                 </td>
                             </tr>
-                        @php $no++; @endphp
                         @endforeach
                         </tbody>
                     </table>
