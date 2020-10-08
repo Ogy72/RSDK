@@ -107,5 +107,8 @@ Route::put('/data-pasien/update/{no_rm}', 'PasienController@update');
 Route::get('/data-pasien/hapus/{no_rm}', 'PasienController@destroy');
 Route::get('/data-pasien/print_kib/{no_rm}', 'PasienController@print_kib');
 
+//Route rekam medis
+Route::get('/rekam-medis', 'RmController@view');
+
 Auth::routes();
 

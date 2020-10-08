@@ -12,4 +12,8 @@ class Pasien extends Model
     protected $keyType = 'string';
     public $incrementing = false;
     protected $fillable = ['nik', 'nama', 'tgl_lahir', 'jk', 'agama', 'status', 'pekerjaan', 'penanggung_jawab', 'alamat', 'no_telp', 'no_rm'];
+
+    public function rekam_medis(){
+        return $this->hasOne('App\RekamMedis');
+    }
 }
