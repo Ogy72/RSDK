@@ -101,10 +101,11 @@ Route::get('/data-pasien', 'PasienController@view');
 Route::get('/data-pasien/add', 'PasienController@add');
 Route::post('/data-pasien/store', 'PasienController@store');
 Route::get('/data-pasien/search', 'PasienController@search');
-Route::get('/data-pasien/info/{nik}', 'PasienController@info');
-Route::get('/data-pasien/edit/{nik}', 'PasienController@edit');
-Route::put('/data-pasien/update/{nik}', 'PasienController@update');
-Route::get('/data-pasien/hapus/{nik}', 'PasienController@destroy');
+Route::get('/data-pasien/info/{no_rm}', 'PasienController@info');
+Route::get('/data-pasien/edit/{no_rm}', 'PasienController@edit');
+Route::put('/data-pasien/update/{no_rm}', 'PasienController@update');
+Route::get('/data-pasien/hapus/{no_rm}', 'PasienController@destroy');
+Route::get('/data-pasien/print_kib/{no_rm}', 'PasienController@print_kib');
 
 Auth::routes();
 

@@ -41,24 +41,26 @@
                     <table class="table table-bordered first">
                         <thead class="thead-dark">
                             <tr>
-                                <th width="18%">No RM</th>
+                                <th width="12%">No RM</th>
+                                <th width="15%">No KTP</th>
                                 <th width="31%">Nama</th>
-                                <th width="15%">Jenis Kelamin</th>
-                                <th width="20%">No Telepon</th>
-                                <th width="16%">Option</th>
+                                <th width="13%">Jenis Kelamin</th>
+                                <th width="13%">No Telepon</th>
+                                <th width="17%">Option</th>
                             </tr>
                         </thead>
                         <tbody>
                         @foreach ($pasien as $p)
                             <tr>
                                 <td>{{ $p->no_rm}} </td>
+                                <td>{{ $p->nik}} </td>
                                 <td>{{ $p->nama }}</td>
                                 <td>{{ $p->jk }}</td>
                                 <td>{{ $p->no_telp }}</td>
                                 <td>
-                                    <a href="/data-pasien/edit/{{ $p->nik }}" class="btn btn-sm btn-light fas fa-edit"></a>
-                                    <a href="/data-pasien/edit/{{ $p->nik }}" class="btn btn-sm btn-light fas fa-trash" onclick="return confirm('Hapus Data ini?')"></a>
-                                    <a href="/data-pasien/info/{{ $p->nik }}" class="btn btn-sm btn-light fas fa-info-circle"></a>
+                                    <a href="/data-pasien/edit/{{ $p->no_rm }}" class="btn btn-sm btn-light fas fa-edit"></a>
+                                    <a href="/data-pasien/hapus/{{ $p->no_rm }}" class="btn btn-sm btn-light fas fa-trash" onclick="return confirm('Hapus Data ini?')"></a>
+                                    <a href="/data-pasien/info/{{ $p->no_rm }}" class="btn btn-sm btn-light fas fa-info-circle"></a>
                                 </td>
                             </tr>
                         @endforeach

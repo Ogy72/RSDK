@@ -14,7 +14,8 @@ class CreatePasiensTable extends Migration
     public function up()
     {
         Schema::create('pasien', function (Blueprint $table) {
-            $table->string('nik', 17)->primary();
+            $table->string('no_rm', 25)->primary();
+            $table->string('nik', 17);
             $table->string('nama', 50);
             $table->date('tgl_lahir');
             $table->string('jk', 10);
@@ -24,7 +25,6 @@ class CreatePasiensTable extends Migration
             $table->string('penanggung_jawab', 50);
             $table->string('alamat', 255);
             $table->string('no_telp', 15);
-            $table->string('no_rm', 25);
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
         });

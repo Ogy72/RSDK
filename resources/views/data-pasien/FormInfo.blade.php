@@ -45,7 +45,12 @@
                             <label for="nid">Nomor RM</label>
                             <input type="text" name="no_rm" class="form-control" value="{{ $pasien->no_rm }}" readonly>
                         </div>
-                        <div class="form-group col-8"></div>
+                        <div class="form-group col-4"></div>
+                        <div class="form-group col-4">
+                            <label for="nid">Nomor Induk KTP</label>
+                            <input type="text" name="nik" class="form-control" value="{{ $pasien->nik }}" readonly>
+                        </div>
+
                     </div>
 
                     <div class="form-row">
@@ -97,7 +102,7 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-9">
-                            <a href="/data-pasien/creat_kib" class="btn btn-primary btn-sm w-100">Print KIB</a>
+                            <a href="/data-pasien/print_kib/{{ $pasien->no_rm }}" target="_blank" class="btn btn-primary btn-sm w-100">Print KIB</a>
                         </div>
                         <div class="form-group col-3">
                             <a href="/data-pasien" class="btn btn-danger btn-sm w-100">Kembali</a>
