@@ -109,6 +109,10 @@ Route::get('/data-pasien/print_kib/{no_rm}', 'PasienController@print_kib');
 
 //Route rekam medis
 Route::get('/rekam-medis', 'RmController@view');
+Route::get('/rekam-medis/detail/{no_rm}', 'RmController@detailRm');
+Route::get('/rekam-medis/search', 'RmController@search');
+Route::get('/rekam-medis/add/{no_rm}', 'RmController@add');
+Route::post('/rekam-medis/store/{no_rm}', 'RmController@store');
 
 Auth::routes();
 

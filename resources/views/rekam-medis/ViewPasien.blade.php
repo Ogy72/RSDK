@@ -6,7 +6,7 @@
 <div class="row">
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="page-header">
-            <h2 class="pageheader-title">Data Rekam Medis</h2>
+            <h2 class="pageheader-title">Data Pasien Rekam Medis</h2>
         </div>
     </div>
 </div>
@@ -42,10 +42,10 @@
                             <tr>
                                 <th width="5%">No</th>
                                 <th width="15%">No RM</th>
-                                <th width="31%">Nama</th>
+                                <th width="33%">Nama</th>
                                 <th width="13%">Jenis Kelamin</th>
                                 <th width="15%">Umur</th>
-                                <th width="17%">Option</th>
+                                <th width="15%">Option</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -67,7 +67,7 @@
                                     Tahun
                                 </td>
                                 <td>
-                                    <a href="/rekam-medis/detail/{{ $p->no_rm }}" class="btn btn-sm btn-light">Detail Rekam Medis <i class="fas fa-clipboard-list"></i></a>
+                                    <a href="/rekam-medis/detail/{{ $p->no_rm }}" class="btn btn-sm btn-primary">Rekam Medis <i class="fas fa-clipboard-list"></i></a>
                                 </td>
                             </tr>
                         @php $no++; @endphp

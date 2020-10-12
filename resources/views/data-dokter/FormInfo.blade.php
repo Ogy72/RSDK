@@ -25,7 +25,7 @@
         <div class="card">
 
             <div class="card-header text-right">
-               <a href="/data-dokter" class="fas fa-sign-out-alt btn btn-primary btn-sm"> Kembali</a>
+               <a href="/data-dokter" class="btn btn-primary btn-sm">Kembali <i class="fas fa-angle-right"></i></a>
             </div>
 
             <div class="card-body">

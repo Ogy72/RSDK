@@ -31,20 +31,28 @@ class PenyakitController extends Controller
     }
 
     //Menyimpan Data Penyakit
-    public function store(Request $request){
-        //Validasi Data
-        $this->validate($request, [
-            'nama_penyakit' => 'required',
+    public static function store(Request $request){
+        PenyakitController::storeDataPenyakit($request);
+        Alert::toast('Data Berhasil Ditambahkan', 'success');
+        return redirect('/data-penyakit');
+    }
+
+    //Fungsi Validasi
+    protected static function rules(){
+        return [
+            'nama_penyakit' => 'required|min:3',
             'gejala' => 'required'
-        ]);
+        ];
+    }
+
+    public static function storeDataPenyakit($request){
+        //Validasi Data
+        $request->validate(PenyakitController::rules());
 
         Penyakit::create([
             'nm_penyakit' => $request->nama_penyakit,
             'gejala' => $request->gejala
         ]);
-
-        Alert::toast('Data Berhasil Ditambahkan', 'success');
-        return redirect('/data-penyakit');
     }
 
     //Pencarian
