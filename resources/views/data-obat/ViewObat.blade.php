@@ -60,7 +60,7 @@
                                 <td>{{ $o->kd_obat }}</td>
                                 <td>{{ $o->nm_obat }}</td>
                                 <td>{{ $o->expired }}</td>
-                                <td>{{ $o->satuan->satuan}}</td>
+                                <td>{{ $o->satuan->satuan }}</td>
                                 <td>{{ $o->satuan->isi_satuan }}</td>
                                 <td class="text-center">Rp. {{ $o->harga }}</td>
                                 <td>{{ $o->stok }}</td>

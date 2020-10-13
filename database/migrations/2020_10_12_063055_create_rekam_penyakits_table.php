@@ -13,7 +13,7 @@ class CreateRekamPenyakitsTable extends Migration
      */
     public function up()
     {
-        Schema::create('penyakit_rekam', function (Blueprint $table) {
+        Schema::create('penyakit_rekam_medis', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('penyakit_id')->unsigned();
             $table->integer('rekam_medis_id')->unsigned();
@@ -29,6 +29,6 @@ class CreateRekamPenyakitsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('penyakit_rekam');
+        Schema::dropIfExists('penyakit_rekam_medis');
     }
 }

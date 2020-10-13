@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="/assets/vendor/charts/c3charts/c3.css">
     <link rel="stylesheet" href="/assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
+    <link rel="stylesheet" href="/assets/vendor/fonts/simple-line-icons/css/simple-line-icons.css">
     <title>Rekam Medis - RSUD Korpri</title>
 </head>
 
@@ -306,6 +307,22 @@
     <script src="/assets/vendor/charts/c3charts/C3chartjs.js"></script>
     <script src="/assets/libs/js/dashboard-ecommerce.js"></script>
     <script src="/assets/vendor/parsley/parsley.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".hide").hide();
+
+            $("#switch12").click(function(){
+                if($(this).prop("checked") == true){
+                    $(".hide").hide();
+                    $("#form-penyakit").prop("disabled", false)
+                } else{
+                    $(".hide").show();
+                    $("#form-penyakit").prop("disabled", true)
+                }
+            })
+        });
+    </script>
+
 </body>
 
 </html>

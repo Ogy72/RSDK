@@ -75,7 +75,7 @@
                                 <td></td>
                                 <td></td>
                                 <td style="text-align:right">
-                                    <a href="/rekam-medis/add/{{ $pasien->no_rm }}" class="btn btn-sm btn-secondary">Tambah Data Pemeriksaan</a>
+                                    <a href="/rekam-medis/add/{{ $pasien->no_rm }}" class="btn btn-sm btn-primary">Tambah Data Pemeriksaan</a>
                                 </td>
                             </tr>
                         </table>
@@ -88,27 +88,29 @@
                     <table class="table table-bordered first">
                         <thead class="thead-dark">
                             <tr>
-                                <th width="3%">No</th>
-                                <th width="13%">Tgl Pemeriksaan</th>
+                                <th width="4%">No</th>
+                                <th width="14%">Tgl Pemeriksaan</th>
                                 <th width="34%">Sakit</th>
-                                <th width="20%">Tindakan</th>
-                                <th width="19%">Obat/Bahan Habis Pakai</th>
-                                <th width="7%">Option</th>
+                                <th width="17%">Tindakan</th>
+                                <th width="21%">Obat/Bahan Habis Pakai</th>
+                                <th width="10%">Option</th>
                             </tr>
                         </thead>
                         <tbody>
+                        @php $no = 1; @endphp
+                        @foreach ($rm as $rm)
                             <tr>
-                                <td style="vertical-align:top">1</td>
-                                <td>
-                                    @if(!empty($rm))
-                                        {{ $rm->tgl_periksa }}
-                                    @else
-                                        Belum Ada Rekam Medis
-                                    @endif
+                                <td style="vertical-align:top">{{ $no }}</td>
+                                <td style="vertical-align:top">
+                                    @php
+                                        echo date('d-m-Y', strtotime($rm->tgl_periksa));
+                                    @endphp
                                 </td>
-                                <td>
-                                    <p class="m-0">Demam Berdarah</p>
-                                    <p class="m-0">Gejala : Hidung Tersumbat, Demam Tinggi, Darah Tinggi.</p>
+                                <td style="vertical-align:top">
+                                    @foreach($rm->penyakit as $p)
+                                        <p class="m-0">{{ $p->nm_penyakit }}</p>
+                                        <p class="m-0">Gejala : {{ $p->gejala }}</p>
+                                    @endforeach
                                 </td>
                                 <td>
                                     <p class="m-0">Pemerikasaan</p>
@@ -122,15 +124,20 @@
                                     <hr class="m-1">
                                     <p class="m-0">Bahan Habis Pakai: Suntikan, Perban</p>
                                 </td>
-                                <td>
-                                    <p class="mb-1"><a href="/rekam-medis/edit/" class="btn btn-sm btn-light fas fa-edit"></a></p>
-                                    <p class="mb-0"><a href="/rekam-medis/hapus/" class="btn btn-sm btn-light fas fa-trash" onclick="return confirm('Hapus Data ini?')"></a></p>
+                                <td class="text-center">
+                                    <p class="mb-1"><a href="/rekam-medis/add-tindakan/{{ $rm->id }}" class="btn btn-sm btn-secondary btn-rounded w-100">Tambah Tindakan</a></p>
+                                    <p class="mb-1"><a href="/rekam-medis/add-obat/{{ $rm->id }}" class="btn btn-sm btn-secondary btn-rounded w-100">Tambah Obat</a></p>
+                                    <a href="/rekam-medis/edit/" class="btn btn-sm btn-light fas fa-edit"></a>
+                                    <a href="/rekam-medis/hapus/" class="btn btn-sm btn-light fas fa-trash" onclick="return confirm('Hapus Data ini?')"></a>
                                 </td>
                             </tr>
+                            @php $no++; @endphp
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
+                <a href="/rekam-medis/print/{{ $rm->pasien_no_rm }}" target="_blank" class="btn btn-sm btn-success w-100"><i class="icon-printer"></i> Print Rekam Medis</a>
         </div>
     </div>
 <!-- ============================================================== -->

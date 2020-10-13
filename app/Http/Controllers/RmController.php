@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Pasien;
 use App\Penyakit;
+use App\BiayaTindakan;
 use App\RekamMedis;
 use App\RekamPenyakit;
 use Alert;
@@ -30,7 +31,7 @@ class RmController extends Controller
     public function detailRm($no_rm){
         if(Gate::authorize('isAdminRm')){
             $pasien = Pasien::find($no_rm);
-            $rm = RekamMedis::where('pasien_no_rm', '=', $no_rm)->first();
+            $rm = RekamMedis::where('pasien_no_rm', '=', $no_rm)->get();
             return view('rekam-medis.ViewDetail', compact('pasien', 'rm'));
         }
     }
@@ -47,9 +48,10 @@ class RmController extends Controller
     //Menampilkan form rekam medis
     public function add($no_rm){
         if(Gate::authorize('isAdminRm')){
+            $tindakan = BiayaTindakan::where('tindakan', 'LIKE', '%'.'pemeriksaan'.'%')->get();
             $penyakit = Penyakit::orderBy('nm_penyakit', 'ASC')->get();
             $rm_pasien = $no_rm;
-            return view('rekam-medis.FormInput', compact('penyakit', 'rm_pasien'));
+            return view('rekam-medis.FormInput', compact('penyakit', 'rm_pasien', 'tindakan'));
         }
     }
 
