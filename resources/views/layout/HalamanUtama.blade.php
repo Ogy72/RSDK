@@ -310,6 +310,8 @@
     <script>
         $(document).ready(function() {
             $(".hide").hide();
+            $("#nama_penyakit").prop("disabled", true)
+            $("#gejala").prop("disabled", true)
 
             $("#switch12").click(function(){
                 if($(this).prop("checked") == true){

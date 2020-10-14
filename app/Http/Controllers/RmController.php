@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Pasien;
 use App\Penyakit;
+use App\Obat;
 use App\BiayaTindakan;
 use App\RekamMedis;
 use App\RekamPenyakit;
@@ -56,6 +57,30 @@ class RmController extends Controller
         }
     }
 
+    //Menampilkan form input tindakan
+    public function addTindakan($id){
+        if(Gate::authorize('isAdminRm')){
+            $tindakan = BiayaTindakan::orderBy('tindakan', 'ASC')->get();
+            $rm = RekamMedis::find($id);
+            $rm_pasien = $rm->pasien_no_rm;
+            $rm_id = $id;
+
+            return view('rekam-medis.FormInputTindakan', compact('tindakan', 'rm_id', 'rm_pasien'));
+        }
+    }
+
+    //Menampilkan form input obat
+    public function addObat($id){
+        if(Gate::authorize('isAdminRm')){
+            $obat = Obat::orderBy('nm_obat', 'ASC')->get();
+            $rm = RekamMedis::find($id);
+            $rm_pasien = $rm->pasien_no_rm;
+            $rm_id = $id;
+
+            return view('rekam-medis.FormInputObat', compact('obat', 'rm_id', 'rm_pasien'));
+        }
+    }
+
     //Input Rekam Medis
     public function store($no_rm, Request $request){
         //Insert Rekam Medis
@@ -65,17 +90,24 @@ class RmController extends Controller
         ]);
 
         //Insert Detail Penyakit
-        $this->addPenyakit($rm, $request);
+        $this->storePenyakit($rm, $request);
 
         //Insert Tindakan
-        $this->addTindakan($rm, $request);
+        $this->storeTindakan($rm->id, $request);
 
         Alert::toast('Data Rekam Medis Berhasil Ditambahkan', 'success');
         return redirect('/rekam-medis/detail/'.$no_rm);
     }
 
-    //Input Penyakit
-    protected function addPenyakit($rm, $request){
+    //Input tindakan
+    public function inputTindakan($rm_id, Request $request){
+        $this->storeTindakan($rm_id, $request);
+        Alert::toast('Data Tindakan Berhasil Ditambahkan', 'success');
+        return redirect('/rekam-medis/detail/'.$request->pasien_no_rm);
+    }
+
+    //Proses Input Penyakit
+    protected function storePenyakit($rm, $request){
         //Input Penyakit Baru
         if(empty($request->penyakit_id)){
             $penyakit = PenyakitController::storeDataPenyakit($request); //Access Function storeDataPenyakit In PenyakitController
@@ -91,12 +123,23 @@ class RmController extends Controller
         }
     }
 
-    //Input Detail Tindakan
-    protected function addTindakan($rm, $request){
+    //Proses Input Detail Tindakan
+    protected function storeTindakan($rm_id, $request){
         RekamTindakan::create([
             'biaya_tindakan_id' => $request->tindakan,
-            'rekam_medis_id' => $rm->id
+            'rekam_medis_id' => $rm_id
         ]);
+    }
+
+    //Hapus Rekam Medis
+    public function destroy($id){
+        if(Gate::authorize('isAdminRm')){
+            $rm = RekamMedis::find($id);
+            $rm->delete();
+
+            Alert::toast('Data Beshasil Dihapus', 'success');
+            return redirect('/rekam-medis/detail/'.$rm->pasien_no_rm);
+        }
     }
 
 

@@ -132,10 +132,11 @@
                                     <p class="m-0">Bahan Habis Pakai: Suntikan, Perban</p>
                                 </td>
                                 <td class="text-center">
-                                    <p class="mb-1"><a href="/rekam-medis/add-tindakan/{{ $rm->id }}" class="btn btn-sm btn-secondary btn-rounded w-100">Tambah Tindakan</a></p>
-                                    <p class="mb-1"><a href="/rekam-medis/add-obat/{{ $rm->id }}" class="btn btn-sm btn-secondary btn-rounded w-100">Tambah Obat</a></p>
+                                    <p class="mb-1"><a href="/rekam-medis/add-tindakan/{{ $rm->id }}" class="btn btn-sm btn-secondary btn-rounded w-100"><i class="fas fa-plus-circle"></i> Tindakan</a></p>
+                                    <p class="mb-1"><a href="/rekam-medis/add-obat/{{ $rm->id }}" class="btn btn-sm btn-secondary btn-rounded w-100"><i class="fas fa-plus-circle"></i> Obat</a></p>
+                                    <p class="mb-1"><a href="/rekam-medis/add-bahan-pakai/{{ $rm->id }}" class="btn btn-sm btn-secondary btn-rounded w-100"><i class="fas fa-plus-circle"></i> Bahan Pakai</a></p>
                                     <a href="/rekam-medis/edit/" class="btn btn-sm btn-light fas fa-edit"></a>
-                                    <a href="/rekam-medis/hapus/" class="btn btn-sm btn-light fas fa-trash" onclick="return confirm('Hapus Data ini?')"></a>
+                                    <a href="/rekam-medis/hapus/{{ $rm->id }}" class="btn btn-sm btn-light fas fa-trash" onclick="return confirm('Hapus Data ini?')"></a>
                                 </td>
                             </tr>
                             @php $no++; @endphp

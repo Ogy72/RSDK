@@ -113,6 +113,12 @@ Route::get('/rekam-medis/detail/{no_rm}', 'RmController@detailRm');
 Route::get('/rekam-medis/search', 'RmController@search');
 Route::get('/rekam-medis/add/{no_rm}', 'RmController@add');
 Route::post('/rekam-medis/store/{no_rm}', 'RmController@store');
+Route::get('/rekam-medis/hapus/{id}', 'RmController@destroy');
+Route::get('/rekam-medis/add-tindakan/{id}', 'RmController@addTindakan');
+Route::post('/rekam-medis/input-tindakan/{rm_id}', 'RmController@inputTindakan');
+Route::get('/rekam-medis/add-obat/{id}', 'RmController@addObat');
+Route::post('/rekam-medis/input-obat/{rm_id}', 'RmController@inputObat');
+
 
 Auth::routes();
 
