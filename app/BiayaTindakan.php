@@ -18,4 +18,9 @@ class BiayaTindakan extends Model
         return $this->belongsTo('App\Perawat');
     }
 
+    public function rekam_medis(){
+        return $this->belongsToMany('App\RekamMedis');
+    }
+
+
 }

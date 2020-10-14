@@ -9,6 +9,7 @@ use App\Penyakit;
 use App\BiayaTindakan;
 use App\RekamMedis;
 use App\RekamPenyakit;
+use App\RekamTindakan;
 use Alert;
 
 class RmController extends Controller
@@ -64,13 +65,38 @@ class RmController extends Controller
         ]);
 
         //Insert Detail Penyakit
-        RekamPenyakit::create([
-            'penyakit_id' => $request->penyakit,
-            'rekam_medis_id' => $rm->id
-        ]);
+        $this->addPenyakit($rm, $request);
+
+        //Insert Tindakan
+        $this->addTindakan($rm, $request);
 
         Alert::toast('Data Rekam Medis Berhasil Ditambahkan', 'success');
         return redirect('/rekam-medis/detail/'.$no_rm);
+    }
+
+    //Input Penyakit
+    protected function addPenyakit($rm, $request){
+        //Input Penyakit Baru
+        if(empty($request->penyakit_id)){
+            $penyakit = PenyakitController::storeDataPenyakit($request); //Access Function storeDataPenyakit In PenyakitController
+            RekamPenyakit::create([
+                'penyakit_id' => $penyakit->id,
+                'rekam_medis_id' => $rm->id
+            ]);
+        } else { //Input Penyakit Dengan Pilihan
+            RekamPenyakit::create([
+                'penyakit_id' => $request->penyakit_id,
+                'rekam_medis_id' => $rm->id
+            ]);
+        }
+    }
+
+    //Input Detail Tindakan
+    protected function addTindakan($rm, $request){
+        RekamTindakan::create([
+            'biaya_tindakan_id' => $request->tindakan,
+            'rekam_medis_id' => $rm->id
+        ]);
     }
 
 

@@ -44,7 +44,7 @@
                         <div class="form-group col-2"></div>
                         <div class="form-group col-8">
                             <label for="pemeriksaan">Pemerikasaan</label>
-                            <select name="pemeriksa" class="form-control" required>
+                            <select name="tindakan" class="form-control" required>
                                 <option value="">Pilih</option>
                                 @foreach ($tindakan as $t)
                                     <option value="{{ $t->id }}">{{ $t->tindakan }} Oleh @if(!empty($t->dokter)) {{ $t->dokter->nama }} @else {{ $t->perawat->nama }} @endif</option>
@@ -61,7 +61,7 @@
                                 <input type="checkbox" checked name="switch12" id="switch12">
                                 <span><label for="switch12"></label></span>
                             </div>
-                            <select name="penyakit" class="form-control" id="form-penyakit" required>
+                            <select name="penyakit_id" class="form-control" id="form-penyakit" required>
                                 <option value="">Pilih Penyakit</option>
                                 @foreach ($penyakit as $p)
                                     <option value="{{ $p->id }}">{{ $p->nm_penyakit }}</option>
@@ -74,7 +74,7 @@
                         <div class="form-group col-2"></div>
                         <div class="form-group col-8">
                             <label for="penyakit">Nama Penyakit</label>
-                            <input type="text" name="penyakit_new" class="form-control" valude="{{ old('penyakit_new') }}">
+                            <input type="text" name="nama_penyakit" class="form-control" id="nama_penyakit" value="{{ old('penyakit_new') }}" required>
                         </div>
                         <div class="form-group col-2"></div>
                     </div>
@@ -82,7 +82,7 @@
                         <div class="form-group col-2"></div>
                         <div class="form-group col-8">
                             <label for="gejala">Gejala</label>
-                            <input type="text" name="gejala_new" class="form-control" valude="{{ old('gejala_new') }}">
+                            <input type="text" name="gejala" class="form-control" id="gejala" value="{{ old('gejala_new') }}" required>
                         </div>
                         <div class="form-group col-2"></div>
                     </div>

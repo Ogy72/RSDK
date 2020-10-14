@@ -315,9 +315,13 @@
                 if($(this).prop("checked") == true){
                     $(".hide").hide();
                     $("#form-penyakit").prop("disabled", false)
+                    $("#nama_penyakit").prop("disabled", true)
+                    $("#gejala").prop("disabled", true)
                 } else{
                     $(".hide").show();
                     $("#form-penyakit").prop("disabled", true)
+                    $("#nama_penyakit").prop("disabled", false)
+                    $("#gejala").prop("disabled", false)
                 }
             })
         });

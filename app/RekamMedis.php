@@ -17,4 +17,16 @@ class RekamMedis extends Model
     public function penyakit(){
         return $this->belongsToMany('App\Penyakit');
     }
+
+    public function tindakan(){
+        return $this->belongsToMany('App\BiayaTindakan');
+    }
+
+    public function obat(){
+        return $this->belongsToMany('App\Obat');
+    }
+
+    public function bahan_pakai(){
+        return $this->belongsToMany('App\BahanPakai');
+    }
 }

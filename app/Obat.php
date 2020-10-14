@@ -16,4 +16,9 @@ class obat extends Model
     public function satuan(){
         return $this->belongsTo('App\Satuan');
     }
+
+    public function rekam_medis(){
+        return $this->belongsToMany('App\RekamMedis');
+    }
+
 }

@@ -49,7 +49,7 @@ class PenyakitController extends Controller
         //Validasi Data
         $request->validate(PenyakitController::rules());
 
-        Penyakit::create([
+       return Penyakit::create([
             'nm_penyakit' => $request->nama_penyakit,
             'gejala' => $request->gejala
         ]);
@@ -92,10 +92,15 @@ class PenyakitController extends Controller
 
     //Hapus Data Penyakit
     public function destroy($id){
-        $penyakit = Penyakit::find($id);
-        $penyakit->delete();
+        try{
+            $penyakit = Penyakit::find($id);
+            $penyakit->delete();
 
-        Alert::toast('Data Berhasil Dihapus', 'success');
-        return redirect('/data-penyakit');
+            Alert::toast('Data Berhasil Dihapus', 'success');
+            return redirect('/data-penyakit');
+        } catch(\Illuminate\Database\QueryException $e){
+            Alert::error('Data Sedang Digunakan', 'Sehingga Tidak Dapat Dihapus');
+            return redirect('/data-penyakit');
+        }
     }
 }

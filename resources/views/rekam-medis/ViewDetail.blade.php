@@ -112,12 +112,19 @@
                                         <p class="m-0">Gejala : {{ $p->gejala }}</p>
                                     @endforeach
                                 </td>
-                                <td>
-                                    <p class="m-0">Pemerikasaan</p>
-                                    <p class="m-0">Oleh : Dokter A</p>
-                                    <hr class="m-1">
-                                    <p class="m-0">Pengambilan Darah</p>
-                                    <p class="m-0">Oleh : Perawat B</p>
+                                <td style="vertical-align:top">
+                                    @foreach($rm->tindakan as $t)
+                                        <p class="m-0">{{ $t->tindakan}}</p>
+                                        <p class="m-0">
+                                            Oleh :
+                                            @if(!empty($t->dokter))
+                                                {{ $t->dokter->nama }}
+                                            @else
+                                                {{ $t->perawat->nama }}
+                                            @endif
+                                        </p>
+                                        <hr class="m-1">
+                                    @endforeach
                                 </td>
                                 <td>
                                     <p class="m-0">Obat: Pil Koplo, Sirup Marjan</p>
@@ -137,7 +144,7 @@
                     </table>
                 </div>
             </div>
-                <a href="/rekam-medis/print/{{ $rm->pasien_no_rm }}" target="_blank" class="btn btn-sm btn-success w-100"><i class="icon-printer"></i> Print Rekam Medis</a>
+                <a href="/rekam-medis/print/{{ $pasien->no_rm }}" target="_blank" class="btn btn-sm btn-success w-100"><i class="icon-printer"></i> Print Rekam Medis</a>
         </div>
     </div>
 <!-- ============================================================== -->

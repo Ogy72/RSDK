@@ -83,10 +83,16 @@ class SatuanController extends Controller
 
     //Hapus Data
     public function destroy($id){
-        $satuan = Satuan::find($id);
-        $satuan->delete();
+        try{
+            $satuan = Satuan::find($id);
+            $satuan->delete();
 
-        Alert::toast('Data Berhasil Dihapus', 'success');
-        return back();
+            Alert::toast('Data Berhasil Dihapus', 'success');
+            return redirect('/data-satuan');
+        } catch(\Illuminate\Database\QueryException $e){
+            Alert::error('Data Sedang Digunakan', 'Sehingga Tidak Dapat Dihapus');
+            return redirect('/data-satuan');
+        }
+
     }
 }

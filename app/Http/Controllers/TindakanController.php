@@ -91,12 +91,16 @@ class TindakanController extends Controller
 
     //Hapus Data Tindakan
     public function destroy($id){
-        //Cari Data
-        $tindakan = BiayaTindakan::find($id);
-        $tindakan->delete();
+        try{
+            $tindakan = BiayaTindakan::find($id);
+            $tindakan->delete();
 
-        Alert::toast('Data Berhasil Dihapus', 'success');
-        return redirect('/data-tindakan');
+            Alert::toast('Data Berhasil Dihapus', 'success');
+            return redirect('/data-tindakan');
+        } catch(\Illuminate\Database\QueryException $e){
+            Alert::error('Data Sedang Digunakan', 'Sehingga Tidak Dapat Dihapus');
+            return redirect('/data-tindakan');
+        }
     }
 
 }
