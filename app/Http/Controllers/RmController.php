@@ -11,6 +11,7 @@ use App\BiayaTindakan;
 use App\RekamMedis;
 use App\RekamPenyakit;
 use App\RekamTindakan;
+use App\RekamObat;
 use Alert;
 
 class RmController extends Controller
@@ -106,6 +107,17 @@ class RmController extends Controller
         return redirect('/rekam-medis/detail/'.$request->pasien_no_rm);
     }
 
+    //Input obat
+    public function inputObat($rm_id, Request $request){
+        $this->validate($request, [
+            'jumlah' => 'required|numeric'
+        ]);
+
+        $this->storeObat($rm_id, $request);
+        Alert::toast('Data Obat Berhasil Ditambahkan', 'success');
+        return redirect('/rekam-medis/detail/'.$request->pasien_no_rm);
+    }
+
     //Proses Input Penyakit
     protected function storePenyakit($rm, $request){
         //Input Penyakit Baru
@@ -129,6 +141,27 @@ class RmController extends Controller
             'biaya_tindakan_id' => $request->tindakan,
             'rekam_medis_id' => $rm_id
         ]);
+    }
+
+    //Proses input obat dan restok
+    protected function storeObat($rm_id, $request){
+        $obat = Obat::find($request->kd_obat);
+        $penggunaan = $request->jumlah;
+        $stok = $obat->stok;
+        if($stok < $penggunaan){
+            Alert::error('Stok', 'Stok Obat Tidak Mencukupi');
+            return back();
+        } else{
+            $restok = $stok-$penggunaan;
+            $obat->stok = $restok;
+            $obat->save();
+
+            RekamObat::create([
+                'obat_kd_obat' => $request->kd_obat,
+                'rekam_medis_id' => $rm_id,
+                'penggunaan' => $penggunaan
+            ]);
+        }
     }
 
     //Hapus Rekam Medis

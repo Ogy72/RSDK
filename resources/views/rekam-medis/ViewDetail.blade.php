@@ -126,8 +126,17 @@
                                         <hr class="m-1">
                                     @endforeach
                                 </td>
-                                <td>
-                                    <p class="m-0">Obat: Pil Koplo, Sirup Marjan</p>
+                                <td style="vertical-align:top">
+                                    @foreach($rm->obat as $o)
+                                        <p class="m-0">Obat:
+                                            {{ $o->nm_obat }} Sebanyak
+                                            @foreach($rm->rekam_obat as $p)
+                                                @if($o->kd_obat == $p->obat_kd_obat)
+                                                    {{ $p->penggunaan }}
+                                                @endif
+                                            @endforeach
+                                        </p>
+                                    @endforeach
                                     <hr class="m-1">
                                     <p class="m-0">Bahan Habis Pakai: Suntikan, Perban</p>
                                 </td>

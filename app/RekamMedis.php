@@ -29,4 +29,8 @@ class RekamMedis extends Model
     public function bahan_pakai(){
         return $this->belongsToMany('App\BahanPakai');
     }
+
+    public function rekam_obat(){
+        return $this->hasMany('App\RekamObat');
+    }
 }

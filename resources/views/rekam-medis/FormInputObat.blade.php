@@ -48,13 +48,17 @@
                             <select name="kd_obat" class="form-control" required>
                                 <option value="">Pilih Obat</option>
                                 @foreach ($obat as $o)
-                                    <option value="{{ $o->kd_obat }}">{{ $o->nm_obat }} | Stok {{ $o->stok }}</option>
+                                    @if(old('kd_obat') == $o->kd_obat)
+                                        <option value="{{ $o->kd_obat }}" selected>{{ $o->nm_obat }} | Stok {{ $o->stok }}</option>
+                                    @else
+                                        <option value="{{ $o->kd_obat }}">{{ $o->nm_obat }} | Stok {{ $o->stok }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group col-3">
                             <label for="jumlah">Jumlah</label>
-                            <input type="text" name="jumlah" class="form-control" {{ old('jumlah') }} placeholder="Jumlah Obat Untuk Pasien" required>
+                            <input type="text" name="jumlah" class="form-control" value="{{ old('jumlah') }}" placeholder="Jumlah Obat Untuk Pasien" required>
                         </div>
                         <div class="form-group col-2"></div>
                     </div>
