@@ -118,6 +118,9 @@ Route::get('/rekam-medis/add-tindakan/{id}', 'RmController@addTindakan');
 Route::post('/rekam-medis/input-tindakan/{rm_id}', 'RmController@inputTindakan');
 Route::get('/rekam-medis/add-obat/{id}', 'RmController@addObat');
 Route::post('/rekam-medis/input-obat/{rm_id}', 'RmController@inputObat');
+Route::get('/rekam-medis/add-bahan/{id}', 'RmController@addBahan');
+Route::post('/rekam-medis/input-bahan/{rm_id}', 'RmController@inputBahan');
+
 
 
 Auth::routes();

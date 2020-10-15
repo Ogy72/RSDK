@@ -90,8 +90,8 @@
                             <tr>
                                 <th width="4%">No</th>
                                 <th width="14%">Tgl Pemeriksaan</th>
-                                <th width="34%">Sakit</th>
-                                <th width="17%">Tindakan</th>
+                                <th width="30%">Sakit</th>
+                                <th width="21%">Tindakan</th>
                                 <th width="21%">Obat/Bahan Habis Pakai</th>
                                 <th width="10%">Option</th>
                             </tr>
@@ -108,13 +108,17 @@
                                 </td>
                                 <td style="vertical-align:top">
                                     @foreach($rm->penyakit as $p)
-                                        <p class="m-0">{{ $p->nm_penyakit }}</p>
+                                        <p class="m-0">{{ $p->nm_penyakit }}
+                                            <a href="/rekam-medis/edit/" class="btn btn-sm btn-light fas fa-edit"></a>
+                                        </p>
                                         <p class="m-0">Gejala : {{ $p->gejala }}</p>
                                     @endforeach
                                 </td>
                                 <td style="vertical-align:top">
                                     @foreach($rm->tindakan as $t)
-                                        <p class="m-0">{{ $t->tindakan}}</p>
+                                        <p class="m-0">{{ $t->tindakan}}
+                                            <a href="/rekam-medis/hapus/{{ $rm->id }}" class="btn btn-sm btn-light fas fa-trash" onclick="return confirm('Hapus Data ini?')"></a>
+                                        </p>
                                         <p class="m-0">
                                             Oleh :
                                             @if(!empty($t->dokter))
@@ -129,7 +133,9 @@
                                 <td style="vertical-align:top">
                                     @foreach($rm->obat as $o)
                                         <p class="m-0">Obat:
-                                            {{ $o->nm_obat }} Sebanyak
+                                            {{ $o->nm_obat }}
+                                                <a href="/rekam-medis/hapus/{{ $rm->id }}" class="btn btn-sm btn-light fas fa-trash" onclick="return confirm('Hapus Data ini?')"></a>
+                                            Sebanyak
                                             @foreach($rm->rekam_obat as $p)
                                                 @if($o->kd_obat == $p->obat_kd_obat)
                                                     {{ $p->penggunaan }}
@@ -138,14 +144,23 @@
                                         </p>
                                     @endforeach
                                     <hr class="m-1">
-                                    <p class="m-0">Bahan Habis Pakai: Suntikan, Perban</p>
+                                    <p class="m-0">Bahan Habis Pakai:</p>
+                                    @foreach($rm->bahan_pakai as $b)
+                                        <p class="m-0">
+                                            {{ $b->bahan}} Sebanyak
+                                            @foreach($rm->rekam_bahan as $bp)
+                                                @if($b->id == $bp->bahan_pakai_id)
+                                                    {{ $bp->penggunaan }}
+                                                @endif
+                                            @endforeach
+                                            <a href="/rekam-medis/hapus/{{ $rm->id }}" class="btn btn-sm btn-light fas fa-trash" onclick="return confirm('Hapus Data ini?')"></a>
+                                        </p>
+                                    @endforeach
                                 </td>
                                 <td class="text-center">
                                     <p class="mb-1"><a href="/rekam-medis/add-tindakan/{{ $rm->id }}" class="btn btn-sm btn-secondary btn-rounded w-100"><i class="fas fa-plus-circle"></i> Tindakan</a></p>
                                     <p class="mb-1"><a href="/rekam-medis/add-obat/{{ $rm->id }}" class="btn btn-sm btn-secondary btn-rounded w-100"><i class="fas fa-plus-circle"></i> Obat</a></p>
-                                    <p class="mb-1"><a href="/rekam-medis/add-bahan-pakai/{{ $rm->id }}" class="btn btn-sm btn-secondary btn-rounded w-100"><i class="fas fa-plus-circle"></i> Bahan Pakai</a></p>
-                                    <a href="/rekam-medis/edit/" class="btn btn-sm btn-light fas fa-edit"></a>
-                                    <a href="/rekam-medis/hapus/{{ $rm->id }}" class="btn btn-sm btn-light fas fa-trash" onclick="return confirm('Hapus Data ini?')"></a>
+                                    <p class="mb-1"><a href="/rekam-medis/add-bahan/{{ $rm->id }}" class="btn btn-sm btn-secondary btn-rounded w-100"><i class="fas fa-plus-circle"></i> Bahan Pakai</a></p>
                                 </td>
                             </tr>
                             @php $no++; @endphp
