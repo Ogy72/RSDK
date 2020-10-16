@@ -111,6 +111,7 @@ class PasienController extends Controller
         Alert::toast('Data Pasien Berhasil Dihapus', 'success');
         return back();
     }
+
     //Print KIB
     public function print_kib($no_rm){
         if(Gate::authorize('isAdminRm')){

@@ -124,6 +124,7 @@ Route::post('/rekam-medis/update-penyakit/{prm_id}', 'RmController@updatePenyaki
 Route::get('/rekam-medis/hapus-tindakan/{rt_id}', 'RmController@destroyTindakan');
 Route::get('/rekam-medis/hapus-obat/{ro_id}', 'RmController@destroyObat');
 Route::get('/rekam-medis/hapus-bahan/{bp_id}', 'RmController@destroyBahan');
+Route::get('/rekam-medis/print-rm/{no_rm}', 'RmController@printRm');
 
 
 

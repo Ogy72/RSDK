@@ -15,6 +15,7 @@ use App\RekamTindakan;
 use App\RekamObat;
 use App\RekamBahan;
 use Alert;
+use PDF;
 
 class RmController extends Controller
 {
@@ -206,6 +207,15 @@ class RmController extends Controller
         }
     }
 
+    //Print Rekam Medis
+    public function printRm($no_rm){
+        if(Gate::authorize('isPerawat')){
+            $pasien = Pasien::find($no_rm);
+            $rm = RekamMedis::where('pasien_no_rm', '=', $no_rm)->get();
+            $pdf = PDF::loadview('rekam-medis.PrintRm', compact('pasien', 'rm'));
+            return $pdf->stream('Rekam_Medis_'.$pasien->no_rm.'.pdf');
+        }
+    }
 
     //Proses Input Penyakit
     protected function storePenyakit($rm, $request){

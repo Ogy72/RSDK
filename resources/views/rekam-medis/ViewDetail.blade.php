@@ -187,7 +187,7 @@
                     </table>
                 </div>
             </div>
-                <a href="/rekam-medis/print/{{ $pasien->no_rm }}" target="_blank" class="btn btn-sm btn-success w-100"><i class="icon-printer"></i> Print Rekam Medis</a>
+                <a href="/rekam-medis/print-rm/{{ $pasien->no_rm }}" target="_blank" class="btn btn-sm btn-success w-100"><i class="icon-printer"></i> Print Rekam Medis</a>
         </div>
     </div>
 <!-- ============================================================== -->
