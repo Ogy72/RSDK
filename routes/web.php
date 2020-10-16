@@ -113,13 +113,17 @@ Route::get('/rekam-medis/detail/{no_rm}', 'RmController@detailRm');
 Route::get('/rekam-medis/search', 'RmController@search');
 Route::get('/rekam-medis/add/{no_rm}', 'RmController@add');
 Route::post('/rekam-medis/store/{no_rm}', 'RmController@store');
-Route::get('/rekam-medis/hapus/{id}', 'RmController@destroy');
 Route::get('/rekam-medis/add-tindakan/{id}', 'RmController@addTindakan');
 Route::post('/rekam-medis/input-tindakan/{rm_id}', 'RmController@inputTindakan');
 Route::get('/rekam-medis/add-obat/{id}', 'RmController@addObat');
 Route::post('/rekam-medis/input-obat/{rm_id}', 'RmController@inputObat');
 Route::get('/rekam-medis/add-bahan/{id}', 'RmController@addBahan');
 Route::post('/rekam-medis/input-bahan/{rm_id}', 'RmController@inputBahan');
+Route::get('/rekam-medis/edit-penyakit/{rm_id}/{p_id}/{no_rm}', 'RmController@editPenyakit');
+Route::post('/rekam-medis/update-penyakit/{prm_id}', 'RmController@updatePenyakit');
+Route::get('/rekam-medis/hapus-tindakan/{rt_id}', 'RmController@destroyTindakan');
+Route::get('/rekam-medis/hapus-obat/{ro_id}', 'RmController@destroyObat');
+Route::get('/rekam-medis/hapus-bahan/{bp_id}', 'RmController@destroyBahan');
 
 
 

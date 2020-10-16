@@ -30,15 +30,29 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('isPerawat', function($user){
-            return $user->level == 'Perawat' or 'Admin';
+            if($user->level == 'Perawat'){
+                return $user->level == 'Perawat';
+            } else if($user->level == 'Admin RM'){
+                return $user->level == 'Admin RM';
+            } else{
+                return $user->level == 'Admin';
+            }
         });
 
         Gate::define('isAdminRm', function($user){
-            return $user->level == 'Admin RM' or 'Admin';
+            if($user->level == 'Admin RM'){
+                return $user->level == 'Admin RM';
+            } else{
+                return $user->level == 'Admin';
+            }
         });
 
         Gate::define('isAdminKeuangan', function($user){
-            return $user->level == 'Admin Keuangan' or 'Admin';
+            if($user->level == 'Admin Keuangan'){
+                return $user->level == 'Aadmin Keuangan';
+            } else{
+                return $user->level == 'Admin';
+            }
         });
 
 

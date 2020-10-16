@@ -1,5 +1,5 @@
 <head>
-    <title>Input Bahan Habis Pakai</title>
+    <title>Edit Penyakit</title>
 </head>
 @extends('layout.HalamanUtama')
 <!-- ============================================================== -->
@@ -34,31 +34,27 @@
         <div class="card">
 
             <div class="card-header">
-                <h2 class="pageheader-title">Input Bahan Habis Pakai</h2>
+                <h2 class="pageheader-title">Edit Penyakit</h2>
             </div>
 
             <div class="card-body">
-                <form action="/rekam-medis/input-bahan/{{ $rm_id }}" method="post">
+                <form action="/rekam-medis/update-penyakit/{{ $prm->id }}" method="post">
                     @csrf
-                    <input type="hidden" name="pasien_no_rm" value="{{ $rm_pasien }}">
-                    <div class="form-row">
+                    <input type="hidden" name="pasien_no_rm" value="{{ $no_rm }}">
+                   <div class="form-row">
                         <div class="form-group col-2"></div>
-                        <div class="form-group col-5">
-                            <label for="obat">Bahan Habis Pakai</label>
-                            <select name="bahan_id" class="form-control" required>
-                                <option value="">Pilih Bahan Habis Pakai</option>
-                                @foreach ($bahan as $b)
-                                    @if(old('bahan_id') == $b->id)
-                                        <option value="{{ $b->id }}" selected>{{ $b->bahan }}</option>
+                        <div class="form-group col-8">
+                            <label for="penyakit">Penyakit</label>
+                            <select name="penyakit_id" class="form-control" id="form-penyakit" required>
+                                <option value="">Pilih Penyakit</option>
+                                @foreach ($penyakit as $p)
+                                    @if($p_id == $p->id)
+                                        <option value="{{ $p->id }}" selected>{{ $p->nm_penyakit }}</option>
                                     @else
-                                        <option value="{{ $b->id }}">{{ $b->bahan }}</option>
+                                        <option value="{{ $p->id }}">{{ $p->nm_penyakit }}</option>
                                     @endif
                                 @endforeach
                             </select>
-                        </div>
-                        <div class="form-group col-3">
-                            <label for="jumlah">Jumlah</label>
-                            <input type="text" name="jumlah" class="form-control" value="{{ old('jumlah') }}" placeholder="Jumlah Bahan Dipakai" required>
                         </div>
                         <div class="form-group col-2"></div>
                     </div>
@@ -69,10 +65,9 @@
                             <input type="submit" value="Simpan" class="btn btn-primary btn-sm w-100">
                         </div>
                         <div class="form-group col-3">
-                            <a href="/rekam-medis/detail/{{ $rm_pasien }}" class="btn btn-danger btn-sm w-100">Batal</a>
+                            <a href="/rekam-medis/detail/{{ $no_rm }}" class="btn btn-danger btn-sm w-100">Batal</a>
                         </div>
                         <div class="form-group col-2"></div>
-
                     </div>
                 </form>
             </div>

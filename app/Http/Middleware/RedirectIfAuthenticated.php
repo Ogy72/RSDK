@@ -23,8 +23,10 @@ class RedirectIfAuthenticated
             //return redirect(RouteServiceProvider::HOME);
             if(Gate::allows('isAdminRm')) {
                 return redirect('/data-pasien');
-            } else {
-                return redirect('/data-obat');
+            } else if(Gate::allows('isPerawat')){
+                return redirect('/rekam-medis');
+            } else{
+                return redirect('/data-keuangan');
             }
         }
 

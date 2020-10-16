@@ -88,79 +88,97 @@
                     <table class="table table-bordered first">
                         <thead class="thead-dark">
                             <tr>
-                                <th width="4%">No</th>
-                                <th width="14%">Tgl Pemeriksaan</th>
-                                <th width="30%">Sakit</th>
-                                <th width="21%">Tindakan</th>
-                                <th width="21%">Obat/Bahan Habis Pakai</th>
-                                <th width="10%">Option</th>
+                                <th width="2%">No</th>
+                                <th width="47%" colspan="2">Pemeriksaan</th>
+                                <th width="23%">Tindakan</th>
+                                <th width="23%">Obat/Bahan Habis Pakai</th>
+                                <th width="5%">Option</th>
                             </tr>
                         </thead>
                         <tbody>
                         @php $no = 1; @endphp
                         @foreach ($rm as $rm)
                             <tr>
-                                <td style="vertical-align:top">{{ $no }}</td>
-                                <td style="vertical-align:top">
+                                <td style="vertical-align:top" rowspan="2">{{ $no }}</td>
+                                <td class="text-dark" width="10%">
+                                    Tgl Periksa
+                                </td>
+                                <td class="text-dark" width="37%">
                                     @php
                                         echo date('d-m-Y', strtotime($rm->tgl_periksa));
                                     @endphp
                                 </td>
-                                <td style="vertical-align:top">
-                                    @foreach($rm->penyakit as $p)
-                                        <p class="m-0">{{ $p->nm_penyakit }}
-                                            <a href="/rekam-medis/edit/" class="btn btn-sm btn-light fas fa-edit"></a>
-                                        </p>
-                                        <p class="m-0">Gejala : {{ $p->gejala }}</p>
-                                    @endforeach
-                                </td>
-                                <td style="vertical-align:top">
+                                <td style="vertical-align:top" rowspan="2">
+                                    <ul class="list-group list-group-flush">
                                     @foreach($rm->tindakan as $t)
-                                        <p class="m-0">{{ $t->tindakan}}
-                                            <a href="/rekam-medis/hapus/{{ $rm->id }}" class="btn btn-sm btn-light fas fa-trash" onclick="return confirm('Hapus Data ini?')"></a>
-                                        </p>
-                                        <p class="m-0">
+                                        <li class="list-group-item pl-0 pr-0 pt-1 pb-1">
+                                            <p class="m-0">
+                                                @foreach($rm->rekam_tindakan as $rt)
+                                                    @if($t->id == $rt->biaya_tindakan_id )
+                                                        <a href="/rekam-medis/hapus-tindakan/{{ $rt->id }}" class="fas fa-minus-circle" onclick="return confirm('Hapus Tindakan ini?')"></a>
+                                                    @endif
+                                                @endforeach
+                                                {{ $t->tindakan}}
+                                            </p>
                                             Oleh :
                                             @if(!empty($t->dokter))
                                                 {{ $t->dokter->nama }}
                                             @else
                                                 {{ $t->perawat->nama }}
                                             @endif
-                                        </p>
-                                        <hr class="m-1">
+                                        </li>
                                     @endforeach
+                                    </ul>
                                 </td>
-                                <td style="vertical-align:top">
+                                <td style="vertical-align:top" rowspan="2">
+                                    <ul class="list-group list-group-flush">
                                     @foreach($rm->obat as $o)
-                                        <p class="m-0">Obat:
-                                            {{ $o->nm_obat }}
-                                                <a href="/rekam-medis/hapus/{{ $rm->id }}" class="btn btn-sm btn-light fas fa-trash" onclick="return confirm('Hapus Data ini?')"></a>
-                                            Sebanyak
-                                            @foreach($rm->rekam_obat as $p)
-                                                @if($o->kd_obat == $p->obat_kd_obat)
-                                                    {{ $p->penggunaan }}
-                                                @endif
-                                            @endforeach
-                                        </p>
+                                        <li class="list-group-item pl-0 pr-0 pt-1 pb-1">
+                                            <p class="m-0">
+                                                @foreach($rm->rekam_obat as $ro)
+                                                    @if($o->kd_obat == $ro->obat_kd_obat)
+                                                        <a href="/rekam-medis/hapus-obat/{{ $ro->id }}" class="ml-2 fas fa-minus-circle" onclick="return confirm('Hapus Obat ini?')"></a>
+                                                        {{ $o->nm_obat }}
+                                                        <span class="badge badge-primary badge-pill">
+                                                            {{ $ro->penggunaan }}
+                                                        </span>
+                                                    @endif
+                                                @endforeach
+                                            </p>
+                                        </li>
                                     @endforeach
-                                    <hr class="m-1">
-                                    <p class="m-0">Bahan Habis Pakai:</p>
                                     @foreach($rm->bahan_pakai as $b)
-                                        <p class="m-0">
-                                            {{ $b->bahan}} Sebanyak
-                                            @foreach($rm->rekam_bahan as $bp)
-                                                @if($b->id == $bp->bahan_pakai_id)
-                                                    {{ $bp->penggunaan }}
-                                                @endif
-                                            @endforeach
-                                            <a href="/rekam-medis/hapus/{{ $rm->id }}" class="btn btn-sm btn-light fas fa-trash" onclick="return confirm('Hapus Data ini?')"></a>
-                                        </p>
+                                        <li class="list-group-item pl-0 pr-0 pt-1 pb-1">
+                                            <p class="m-0">
+                                                @foreach($rm->rekam_bahan as $bp)
+                                                    @if($b->id == $bp->bahan_pakai_id)
+                                                        <a href="/rekam-medis/hapus-bahan/{{ $bp->id }}" class="ml-2 fas fa-minus-circle" onclick="return confirm('Hapus Bahan ini?')"></a>
+                                                        {{ $b->bahan }}
+                                                        <span class="badge badge-primary badge-pill">
+                                                            {{ $bp->penggunaan }}
+                                                        </span>
+                                                    @endif
+                                                @endforeach
+                                            </p>
+                                        </li>
                                     @endforeach
+                                    </ul>
                                 </td>
-                                <td class="text-center">
-                                    <p class="mb-1"><a href="/rekam-medis/add-tindakan/{{ $rm->id }}" class="btn btn-sm btn-secondary btn-rounded w-100"><i class="fas fa-plus-circle"></i> Tindakan</a></p>
-                                    <p class="mb-1"><a href="/rekam-medis/add-obat/{{ $rm->id }}" class="btn btn-sm btn-secondary btn-rounded w-100"><i class="fas fa-plus-circle"></i> Obat</a></p>
-                                    <p class="mb-1"><a href="/rekam-medis/add-bahan/{{ $rm->id }}" class="btn btn-sm btn-secondary btn-rounded w-100"><i class="fas fa-plus-circle"></i> Bahan Pakai</a></p>
+                                <td class="text-center" rowspan="2">
+                                    <p class="mb-1"><a href="/rekam-medis/add-tindakan/{{ $rm->id }}" class="btn btn-sm btn-secondary btn-rounded w-100"><i class="fas fa-user-md"></i></a></p>
+                                    <p class="mb-1"><a href="/rekam-medis/add-obat/{{ $rm->id }}" class="btn btn-sm btn-secondary btn-rounded w-100"><i class="fas fa-capsules fas"></i></a></p>
+                                    <p class="mb-1"><a href="/rekam-medis/add-bahan/{{ $rm->id }}" class="btn btn-sm btn-secondary btn-rounded w-100"><i class="fas fa-syringe"></i></a></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Sakit</td>
+                                <td>
+                                    @foreach($rm->penyakit as $p)
+                                        <p class="m-0">{{ $p->nm_penyakit }}
+                                            <a href="/rekam-medis/edit-penyakit/{{ $rm->id }}/{{ $p->id }}/{{ $rm->pasien_no_rm }}" class="ml-2 fas fa-edit"></a>
+                                        </p>
+                                        <p class="m-0">Gejala : {{ $p->gejala }}</p>
+                                    @endforeach
                                 </td>
                             </tr>
                             @php $no++; @endphp

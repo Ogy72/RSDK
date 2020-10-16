@@ -37,4 +37,9 @@ class RekamMedis extends Model
     public function rekam_bahan(){
         return $this->hasMany('App\RekamBahan');
     }
+
+    public function rekam_tindakan(){
+        return $this->hasMany('App\RekamTindakan');
+    }
+
 }

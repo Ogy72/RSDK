@@ -26,7 +26,7 @@ class RmController extends Controller
 
     //Menampilkan Daftar Pasien
      public function view(){
-        if(Gate::authorize('isAdminRm')){
+        if(Gate::authorize('isPerawat')){
             $pasien = Pasien::orderBy('updated_at', 'DESC')->paginate(5);
             return view('rekam-medis.ViewPasien', compact('pasien'));
         }
@@ -34,7 +34,7 @@ class RmController extends Controller
 
     //Menampilkan detail rekam medis
     public function detailRm($no_rm){
-        if(Gate::authorize('isAdminRm')){
+        if(Gate::authorize('isPerawat')){
             $pasien = Pasien::find($no_rm);
             $rm = RekamMedis::where('pasien_no_rm', '=', $no_rm)->get();
             return view('rekam-medis.ViewDetail', compact('pasien', 'rm'));
@@ -52,7 +52,7 @@ class RmController extends Controller
 
     //Menampilkan form rekam medis
     public function add($no_rm){
-        if(Gate::authorize('isAdminRm')){
+        if(Gate::authorize('isPerawat')){
             $tindakan = BiayaTindakan::where('tindakan', 'LIKE', '%'.'pemeriksaan'.'%')->get();
             $penyakit = Penyakit::orderBy('nm_penyakit', 'ASC')->get();
             $rm_pasien = $no_rm;
@@ -62,7 +62,7 @@ class RmController extends Controller
 
     //Menampilkan form input tindakan
     public function addTindakan($id){
-        if(Gate::authorize('isAdminRm')){
+        if(Gate::authorize('isPerawat')){
             $tindakan = BiayaTindakan::orderBy('tindakan', 'ASC')->get();
             $rm = RekamMedis::find($id);
             $rm_pasien = $rm->pasien_no_rm;
@@ -74,7 +74,7 @@ class RmController extends Controller
 
     //Menampilkan form input obat
     public function addObat($id){
-        if(Gate::authorize('isAdminRm')){
+        if(Gate::authorize('isPerawat')){
             $obat = Obat::orderBy('nm_obat', 'ASC')->get();
             $rm = RekamMedis::find($id);
             $rm_pasien = $rm->pasien_no_rm;
@@ -86,13 +86,23 @@ class RmController extends Controller
 
     //Menampilkan form input bahan habis pakai
     public function addBahan($id){
-        if(Gate::authorize('isAdminRm')){
+        if(Gate::authorize('isPerawat')){
             $bahan = BahanPakai::orderBy('bahan', 'ASC')->get();
             $rm = RekamMedis::find($id);
             $rm_pasien = $rm->pasien_no_rm;
             $rm_id = $id;
 
             return view('rekam-medis.FormInputBahan', compact('bahan', 'rm_id', 'rm_pasien'));
+        }
+    }
+
+    //Menampilkan form edit penyakit
+    public function editPenyakit($rm_id, $p_id, $no_rm){
+        if(Gate::authorize('isPerawat')){
+            $penyakit = Penyakit::orderBy('nm_penyakit', 'ASC')->get();
+            $prm = RekamPenyakit::where('rekam_medis_id', '=', $rm_id)->first();
+
+            return view('rekam-medis.FormEditPenyakit', compact('penyakit', 'prm', 'p_id', 'no_rm'));
         }
     }
 
@@ -141,6 +151,59 @@ class RmController extends Controller
         $this->storeBahan($rm_id, $request);
         Alert::toast('Data Bahan Berhasil Ditambahkan', 'success');
         return redirect('/rekam-medis/detail/'.$request->pasien_no_rm);
+    }
+
+    //Update penyakit pasien
+    public function updatePenyakit($prm_id, Request $request){
+        $prm = RekamPenyakit::find($prm_id);
+        $prm->penyakit_id = $request->penyakit_id;
+        $prm->save();
+
+        Alert::toast('Data Penyakit Pasien Berhasil Diubah', 'success');
+        return redirect('/rekam-medis/detail/'.$request->pasien_no_rm);
+    }
+
+    //Hapus Tindakan
+    public function destroyTindakan($rt_id){
+        if(Gate::authorize('isPerawat')){
+            $brm = RekamTindakan::find($rt_id);
+            $brm->delete();
+
+            Alert::toast('Data Tindakan Pasien Berhasil Dihapus', 'success');
+            return back();
+        }
+    }
+
+    //Hapus Obat
+    public function destroyObat($ro_id){
+        if(Gate::authorize('isPerawat')){
+            $orm = RekamObat::find($ro_id);
+            $kd_obat = $orm->obat_kd_obat;
+            $penggunaan = $orm->penggunaan;
+
+            $obat = Obat::find($kd_obat);
+            $stok = $obat->stok;
+            $restok = $stok+$penggunaan;
+            $obat->stok = $restok;
+            $obat->save();
+
+            $orm->delete();
+
+            Alert::toast('Data Obat Pasien Berhasil Dihapus', 'success');
+            return back();
+        }
+    }
+
+
+    //Hapus Bahan Pakai
+    public function destroyBahan($bp_id){
+        if(Gate::authorize('isPerawat')){
+            $bpm = RekamBahan::find($bp_id);
+            $bpm->delete();
+
+            Alert::toast('Data Bahan Habis Pakai Berhasil Dihapus', 'success');
+            return back();
+        }
     }
 
 
@@ -198,18 +261,6 @@ class RmController extends Controller
             'penggunaan' => $request->jumlah
         ]);
     }
-
-    //Hapus Rekam Medis
-    public function destroy($id){
-        if(Gate::authorize('isAdminRm')){
-            $rm = RekamMedis::find($id);
-            $rm->delete();
-
-            Alert::toast('Data Beshasil Dihapus', 'success');
-            return redirect('/rekam-medis/detail/'.$rm->pasien_no_rm);
-        }
-    }
-
 
 
 }
