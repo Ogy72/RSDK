@@ -42,4 +42,8 @@ class RekamMedis extends Model
         return $this->hasMany('App\RekamTindakan');
     }
 
+    public function keuangan(){
+        return $this->hasOne('App\Keuangan');
+    }
+
 }

@@ -112,7 +112,7 @@
                                 <a class="nav-link" href="/rekam-medis"><i class="fas fa-fw fa-clipboard"></i>Rekam Medis</a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link" href="#"><i class="fas fa-fw fa-donate"></i>Pembayaran</a>
+                                <a class="nav-link" href="/data-keuangan"><i class="fas fa-fw fa-donate"></i>Pembayaran</a>
                             </li>
                             <!-- <li class="nav-item">
                                 <a class="nav-link" href="#"><i class="fas fa-fw fa-ambulance"></i>Rujukan</a>
@@ -234,7 +234,7 @@
                                 Menu
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link" href="#"><i class="fas fa-fw fa-donate"></i>Pembayaran</a>
+                                <a class="nav-link" href="/data-keuangan"><i class="fas fa-fw fa-donate"></i>Pembayaran</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fas fa-fw fa-file"></i>Laporan</a>

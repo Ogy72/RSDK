@@ -115,7 +115,9 @@
                                             <p class="m-0">
                                                 @foreach($rm->rekam_tindakan as $rt)
                                                     @if($t->id == $rt->biaya_tindakan_id )
-                                                        <a href="/rekam-medis/hapus-tindakan/{{ $rt->id }}" class="fas fa-minus-circle" onclick="return confirm('Hapus Tindakan ini?')"></a>
+                                                        @if(empty($rm->keuangan))
+                                                            <a href="/rekam-medis/hapus-tindakan/{{ $rt->id }}" class="fas fa-minus-circle" onclick="return confirm('Hapus Tindakan ini?')"></a>
+                                                        @endif
                                                     @endif
                                                 @endforeach
                                                 {{ $t->tindakan}}
@@ -137,7 +139,9 @@
                                             <p class="m-0">
                                                 @foreach($rm->rekam_obat as $ro)
                                                     @if($o->kd_obat == $ro->obat_kd_obat)
-                                                        <a href="/rekam-medis/hapus-obat/{{ $ro->id }}" class="ml-2 fas fa-minus-circle" onclick="return confirm('Hapus Obat ini?')"></a>
+                                                        @if(empty($rm->keuangan))
+                                                            <a href="/rekam-medis/hapus-obat/{{ $ro->id }}" class="ml-2 fas fa-minus-circle" onclick="return confirm('Hapus Obat ini?')"></a>
+                                                        @endif
                                                         {{ $o->nm_obat }}
                                                         <span class="badge badge-primary badge-pill">
                                                             {{ $ro->penggunaan }}
@@ -152,7 +156,9 @@
                                             <p class="m-0">
                                                 @foreach($rm->rekam_bahan as $bp)
                                                     @if($b->id == $bp->bahan_pakai_id)
-                                                        <a href="/rekam-medis/hapus-bahan/{{ $bp->id }}" class="ml-2 fas fa-minus-circle" onclick="return confirm('Hapus Bahan ini?')"></a>
+                                                        @if(empty($rm->keuangan))
+                                                            <a href="/rekam-medis/hapus-bahan/{{ $bp->id }}" class="ml-2 fas fa-minus-circle" onclick="return confirm('Hapus Bahan ini?')"></a>
+                                                        @endif
                                                         {{ $b->bahan }}
                                                         <span class="badge badge-primary badge-pill">
                                                             {{ $bp->penggunaan }}
@@ -175,7 +181,9 @@
                                 <td>
                                     @foreach($rm->penyakit as $p)
                                         <p class="m-0">{{ $p->nm_penyakit }}
-                                            <a href="/rekam-medis/edit-penyakit/{{ $rm->id }}/{{ $p->id }}/{{ $rm->pasien_no_rm }}" class="ml-2 fas fa-edit"></a>
+                                            @if(empty($rm->keuangan))
+                                                <a href="/rekam-medis/edit-penyakit/{{ $rm->id }}/{{ $p->id }}/{{ $rm->pasien_no_rm }}" class="ml-2 fas fa-edit"></a>
+                                            @endif
                                         </p>
                                         <p class="m-0">Gejala : {{ $p->gejala }}</p>
                                     @endforeach

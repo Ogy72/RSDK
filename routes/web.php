@@ -126,6 +126,12 @@ Route::get('/rekam-medis/hapus-obat/{ro_id}', 'RmController@destroyObat');
 Route::get('/rekam-medis/hapus-bahan/{bp_id}', 'RmController@destroyBahan');
 Route::get('/rekam-medis/print-rm/{no_rm}', 'RmController@printRm');
 
+//Route Pembayaran
+Route::get('/data-keuangan', 'KeuanganController@view');
+Route::get('/data-keuangan/search', 'KeuanganController@search');
+Route::get('/data-keuangan/detail/{no_rm}', 'KeuanganController@detailTagihan');
+Route::get('/data-keuangan/form-payment/{no_rm}', 'KeuanganController@formPayment');
+Route::post('/data-keuangan/payment/store', 'KeuanganController@storePayment');
 
 
 Auth::routes();
