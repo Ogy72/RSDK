@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\RekamMedis;
 use App\Pasien;
-use Alert;
+use App\Keuangan;
 use PDF;
 
 class LaporanController extends Controller
@@ -68,6 +68,31 @@ class LaporanController extends Controller
             $jumlah = $rm->count();
             $pdf = PDF::loadview('laporan.PrintPenyakit', compact('rm', 'jumlah', 'date1', 'date2'));
             return $pdf->stream('Laporan Data Penyakit.pdf');
+        }
+    }
+
+    //Menampilkan data laporan keuangan
+    public function keuangan(Request $request){
+        if(Gate::authorize('isAdminKeuangan')){
+            if(empty($request->date1)){
+                return view('laporan.DataKeuangan');
+            } else{
+                $date1 = $request->date1.' 00-00-00';
+                $date2 = $request->date2.' 00-00-00';
+                $keuangan = Keuangan::whereBetween('created_at', [$date1, $date2])->get();
+                $jumlah = $keuangan->sum('total');
+                return view('laporan.DataKeuangan', compact('keuangan', 'date1', 'date2', 'jumlah'));
+            }
+        }
+    }
+
+    //Print laporan data keuangan
+    public function printKeuangan($date1, $date2){
+        if(Gate::authorize('isAdminKeuangan')){
+            $keuangan = Keuangan::whereBetween('created_at', [$date1, $date2])->get();
+            $jumlah = $keuangan->sum('total');
+            $pdf = PDF::loadview('laporan.PrintKeuangan', compact('keuangan', 'jumlah', 'date1', 'date2'));
+            return $pdf->stream('Laporan Data Keuangan.pdf');
         }
     }
 

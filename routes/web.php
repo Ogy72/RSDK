@@ -141,8 +141,5 @@ Route::get('/laporan/penyakit/print/{date1}/{date2}', 'LaporanController@printPe
 Route::get('/laporan/keuangan/', 'LaporanController@keuangan');
 Route::get('/laporan/keuangan/print/{date1}/{date2}', 'LaporanController@printKeuangan');
 
-
-
-
 Auth::routes();
 
