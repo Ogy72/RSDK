@@ -136,6 +136,12 @@ Route::post('/data-keuangan/payment/store', 'KeuanganController@storePayment');
 //Route Laporan
 Route::get('/laporan/pasien/', 'LaporanController@pasien');
 Route::get('/laporan/pasien/print/{date1}/{date2}', 'LaporanController@printPasien');
+Route::get('/laporan/penyakit/', 'LaporanController@penyakit');
+Route::get('/laporan/penyakit/print/{date1}/{date2}', 'LaporanController@printPenyakit');
+Route::get('/laporan/keuangan/', 'LaporanController@keuangan');
+Route::get('/laporan/keuangan/print/{date1}/{date2}', 'LaporanController@printKeuangan');
+
+
 
 
 Auth::routes();

@@ -29,7 +29,7 @@
         <div class="card">
 
             <div class="card-header"><!--card header-->
-                <h2 align="center">Laporan Data Pasien</h2>
+                <h2 align="center">Laporan Data Penyakit</h2>
                 <h3 align="center">
                     Periode:
                     @php
@@ -45,35 +45,29 @@
                             <tr>
                                 <th width="10px" style="padding:5px">No</th>
                                 <th width="100px" style="padding:5px">No RM</th>
-                                <th width="100px">No KTP</th>
-                                <th width="170px">Nama</th>
-                                <th width="100px" style="padding:5px">Jenis Kelamin</th>
-                                <th width="100px">No Telepon</th>
+                                <th width="270px">Nama</th>
+                                <th width="120px" style="padding:5px">Jenis Kelamin</th>
+                                <th width="150px">Penyakit</th>
                             </tr>
                         </thead>
                         <tbody>
                         @php $no = 1; @endphp
-                        @foreach ($pasien as $p)
+                        @foreach ($rm as $rm)
                             <tr>
                                 <td style="padding:5px">{{ $no }} </td>
-                                <td style="padding:5px">{{ $p->no_rm}} </td>
-                                <td style="padding:5px">{{ $p->nik}} </td>
-                                <td style="padding:5px">{{ $p->nama }}</td>
-                                <td style="padding:5px">{{ $p->jk }}</td>
-                                <td style="padding:5px">{{ $p->no_telp }}</td>
+                                <td style="padding:5px">{{ $rm->pasien_no_rm}} </td>
+                                <td style="padding:5px">{{ $rm->pasien->nama }}</td>
+                                <td style="padding:5px">{{ $rm->pasien->jk }}</td>
+                                <td style="padding:5px">
+                                    @foreach($rm->penyakit as $p)
+                                        {{ $p->nm_penyakit }}
+                                    @endforeach
+                                </td>
                             </tr>
                         @php $no++ @endphp
                         @endforeach
                         <tr class="text-dark">
-                            <td colspan="5" style="padding:5px">Jumlah Pasien Laki-laki</td>
-                            <td align="center">{{ $jl }}</td>
-                        </tr>
-                        <tr class="text-dark">
-                            <td colspan="5" style="padding:5px">Jumlah Pasien Perempuan</td>
-                            <td align="center">{{ $jp }}</td>
-                        </tr>
-                        <tr class="text-dark">
-                            <td colspan="5" style="padding:5px">Total Pasien</td>
+                            <td colspan="4" style="padding:5px">Total Penyakit</td>
                             <td align="center">{{ $jumlah }}</td>
                         </tr>
                         </tbody>
