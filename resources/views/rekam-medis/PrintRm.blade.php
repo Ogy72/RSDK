@@ -1,17 +1,33 @@
+<title>Print RM</title>
 <!-- ============================================================== -->
 <!-- pageheader -->
 <!-- ============================================================== -->
-<h2 class="pageheader-title">Data Rekam Medis</h2>
+<table cellspacing="0"  align=center >
+<tr>
+    <td rowspan=2 width="120px" align="center">
+        <img src='RSUD.jpg' width='110px' height='70px'>
+    </td>
+    <td  align=center>
+        <h3>RUMAH SAKIT UMUM DAERAH (RSUD) KORPRI</h3>
+    </td>
+</tr>
+<tr>
+    <td align=center>
+        Jl. Kesuma Bangsa, Sungai Pinang Luar, Kec. Samarinda Kota, Kota Samarinda, Kalimantan Timur 75242
+    </td>
+</tr>
+</table>
 <!-- ============================================================== -->
 <!-- end pageheader -->
 <!-- ============================================================== -->
-
+<hr>
 <!-- ============================================================== -->
 <!-- basic table  -->
 <!-- ============================================================== -->
+<h3 align="center">Data Rekam Medis Pasien</h3>
 <table>
     <tr>
-        <td width="120px">No RM</td>
+        <td width="110px">No RM</td>
         <td>:</td>
         <td width="300px">{{ $pasien->no_rm }}</td>
         <td width="120px">NIK</td>
