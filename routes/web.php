@@ -134,7 +134,8 @@ Route::get('/data-keuangan/form-payment/{no_rm}', 'KeuanganController@formPaymen
 Route::post('/data-keuangan/payment/store', 'KeuanganController@storePayment');
 
 //Route Laporan
-Route::get('/laporan/pasien', 'LaporanController@pasien');
+Route::get('/laporan/pasien/', 'LaporanController@pasien');
+Route::get('/laporan/pasien/print/{date1}/{date2}', 'LaporanController@printPasien');
 
 
 Auth::routes();

@@ -122,16 +122,16 @@
                                 <div id="submenu-2" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false">Laporan Data Pasien</a>
+                                            <a class="nav-link" href="/laporan/pasien">Laporan Data Pasien</a>
                                         </li>
                                         <!-- <li class="nav-item">
                                             <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false">Laporan Data Dokter</a>
                                         </li> -->
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false">Laporan Data Penyakit</a>
+                                            <a class="nav-link" href="/laporan/penyakit">Laporan Data Penyakit</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false">Laporan Data Pembayaran</a>
+                                            <a class="nav-link" href="/laporan/keuangan">Laporan Data Pembayaran</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -167,7 +167,7 @@
                                             <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false">Laporan Data Dokter</a>
                                         </li> -->
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false">Laporan Data Penyakit</a>
+                                            <a class="nav-link" href="/laporan/penyakit">Laporan Data Penyakit</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -207,7 +207,7 @@
                                 <div id="submenu-2" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false">Laporan Data Pasien</a>
+                                            <a class="nav-link" href="/laporan/pasien">Laporan Data Pasien</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -241,7 +241,7 @@
                                 <div id="submenu-2" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false">Laporan Data Pembayaran</a>
+                                            <a class="nav-link" href="/laporan/keuangan">Laporan Data Pembayaran</a>
                                         </li>
                                     </ul>
                                 </div>

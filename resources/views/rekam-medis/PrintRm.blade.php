@@ -140,6 +140,5 @@
             ( Direktur RSUD )
         </td>
     </tr>
-
 </table>
 
