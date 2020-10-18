@@ -49,7 +49,7 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('isAdminKeuangan', function($user){
             if($user->level == 'Admin Keuangan'){
-                return $user->level == 'Aadmin Keuangan';
+                return $user->level == 'Admin Keuangan';
             } else{
                 return $user->level == 'Admin';
             }

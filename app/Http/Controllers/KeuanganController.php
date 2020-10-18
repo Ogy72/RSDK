@@ -21,7 +21,7 @@ class KeuanganController extends Controller
     //Menampilkan Daftar Pasien
      public function view(){
         if(Gate::authorize('isAdminKeuangan')){
-            $pasien = Pasien::orderBy('created_at', 'ASC')->paginate(5);
+            $pasien = Pasien::orderBy('created_at', 'DESC')->paginate(5);
             return view('data-keuangan.ViewPasien', compact('pasien'));
         }
      }
@@ -49,7 +49,12 @@ class KeuanganController extends Controller
         if(Gate::authorize('isAdminKeuangan')){
             $pasien = Pasien::find($no_rm);
             $rm = RekamMedis::where('pasien_no_rm', '=', $no_rm)->get();
-            return view('data-keuangan.FormPayment', compact('pasien', 'rm'));
+            if(empty($rm->keuangan)){
+                return view('data-keuangan.FormPayment', compact('pasien', 'rm'));
+            } else{
+                Alert::error('Tagihan Sudah Lunas', 'Tagihan Tersebut Tidak Dapat Diproses Karena Sudah Lunas');
+                return back();
+            }
         }
     }
 
@@ -59,6 +64,7 @@ class KeuanganController extends Controller
             $this->validate($request, [
                 'nominal' => 'required|numeric'
             ]);
+
         $nominal = $request->nominal;
         $tagihan = $request->tagihan;
 
@@ -110,7 +116,10 @@ class KeuanganController extends Controller
             }
             //EndAllForaech
             $kembalian = $nominal-$tagihan;
-            echo "Nominal: $nominal <br> Tagihan: $tagihan <br> Kembalian: $kembalian";
+            $pasien = Pasien::find($request->no_rm);
+            $rm2 = RekamMedis::where('pasien_no_rm', '=', $request->no_rm)->get();
+            $pdf = PDF::loadview('data-keuangan.InvoicePembayaran', compact('pasien', 'rm2', 'nominal', 'tagihan', 'kembalian'));
+            return $pdf->stream('Invoice_'.$pasien->no_rm.'.pdf');
         }else{
             Alert::error('Nominal Kurang', 'Nominal Yang Anda Masukkan Kurang Dari Tagihan');
             return back();
