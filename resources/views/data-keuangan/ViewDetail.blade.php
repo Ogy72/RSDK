@@ -84,12 +84,10 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered first">
-                    @php $no = 1; @endphp
                     @foreach ($rm as $rm)
                         @if(empty($rm->keuangan))
                        <thead class="thead-dark">
                             <tr>
-                                <th width="5%">No</th>
                                 <th width="15%">Tgl Periksa</th>
                                 <th width="20%">Rincian Tindakan</th>
                                 <th width="15%">Biaya</th>
@@ -100,7 +98,6 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td style="vertical-align:top">{{ $no }}</td>
                                 <td style="vertical-align:top">
                                     @php
                                         echo date('d-m-Y', strtotime($rm->tgl_periksa));
@@ -213,7 +210,7 @@
                                 </td>
                             </tr>
                             <tr class="text-dark">
-                                <td colspan="3">Sub Total</td>
+                                <td colspan="2">Sub Total</td>
                                 <td>
                                     @php
                                         $total_t = 0;
@@ -260,24 +257,24 @@
                                 </td>
                             </tr>
                             <tr class="text-dark">
-                                <td colspan="3">Total</td>
-                                <td colspan="4" class="text-center">
+                                <td colspan="2">Total</td>
+                                <td colspan="3" class="text-center">
                                     @php
                                         $total =  $total_t+$total_bhbs;
                                     @endphp
                                     Rp. {{ $total }}
                                 </td>
+                                <td>
+                                    <a href="/data-keuangan/form-payment/{{ $rm->id }}/{{ $rm->pasien_no_rm }}" target="_blank" class="btn btn-sm btn-success w-100">Bayaran Tagihan</a>
+                                </td>
                             </tr>
                             @endif
-                        @php $no++; @endphp
                         @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
-            @if(!empty($total))
-                <a href="/data-keuangan/form-payment/{{ $pasien->no_rm }}" target="_blank" class="btn btn-sm btn-success w-100">Pembayaran Tagihan</a>
-            @else
+            @if(empty($total))
                 <h5 class="text-center">Tidak Ada Tagihan</h5>
             @endif
         </div>

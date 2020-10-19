@@ -171,9 +171,11 @@
                                     </ul>
                                 </td>
                                 <td class="text-center" rowspan="2">
+                                @if(empty($rm->keuangan))
                                     <p class="mb-1"><a href="/rekam-medis/add-tindakan/{{ $rm->id }}" class="btn btn-sm btn-secondary btn-rounded w-100"><i class="fas fa-user-md"></i></a></p>
                                     <p class="mb-1"><a href="/rekam-medis/add-obat/{{ $rm->id }}" class="btn btn-sm btn-secondary btn-rounded w-100"><i class="fas fa-capsules fas"></i></a></p>
                                     <p class="mb-1"><a href="/rekam-medis/add-bahan/{{ $rm->id }}" class="btn btn-sm btn-secondary btn-rounded w-100"><i class="fas fa-syringe"></i></a></p>
+                                @endif
                                 </td>
                             </tr>
                             <tr>

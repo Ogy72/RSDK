@@ -130,7 +130,7 @@ Route::get('/rekam-medis/print-rm/{no_rm}', 'RmController@printRm');
 Route::get('/data-keuangan', 'KeuanganController@view');
 Route::get('/data-keuangan/search', 'KeuanganController@search');
 Route::get('/data-keuangan/detail/{no_rm}', 'KeuanganController@detailTagihan');
-Route::get('/data-keuangan/form-payment/{no_rm}', 'KeuanganController@formPayment');
+Route::get('/data-keuangan/form-payment/{rm_id}/{no_rm}', 'KeuanganController@formPayment');
 Route::post('/data-keuangan/payment/store', 'KeuanganController@storePayment');
 
 //Route Laporan

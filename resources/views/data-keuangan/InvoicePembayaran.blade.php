@@ -75,13 +75,13 @@
                     @foreach ($rm2 as $rm)
                        <thead>
                             <tr>
-                                <th width="5%">No</th>
-                                <th width="15%">Tgl Periksa</th>
-                                <th width="20%">Rincian Tindakan</th>
-                                <th width="15%">Biaya</th>
-                                <th width="25%">Rincian Obat & Bahan Habis Pakai</th>
-                                <th width="5%">Qty</th>
-                                <th width="15%">Biaya</th>
+                                <th width="10px">No</th>
+                                <th width="100px">Tgl Periksa</th>
+                                <th width="100px">Rincian Tindakan</th>
+                                <th width="75px">Biaya</th>
+                                <th width="200px">Rincian Obat & Bahan Habis Pakai</th>
+                                <th width="10px">Qty</th>
+                                <th width="75px">Biaya</th>
                             </tr>
                         </thead>
                         <tbody>

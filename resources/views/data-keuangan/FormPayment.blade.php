@@ -24,7 +24,7 @@
             <div class="card-header"><!--card header-->
                 <div class="row">
                     <div class="col-12 text-right">
-                        <h3 class="mr-5 mb-0">No Rm : {{ $pasien->no_rm }}</h3>
+                        <h3 class="mr-5 mb-0">No Rm : {{ $no_rm }}</h3>
                     </div>
                 </div>
             </div><!--end card header-->
@@ -123,7 +123,8 @@
                     @endif
                     <form action="/data-keuangan/payment/store" method="post">
                         @csrf
-                        <input type="hidden" name="no_rm" value="{{ $pasien->no_rm }}">
+                        <input type="hidden" name="no_rm" value="{{ $no_rm }}">
+                        <input type="hidden" name="rm_id" value="{{ $rm_id }}">
                         <input type="hidden" name="tagihan" value="{{ $yg_harus_dibayar }}">
                         <input type="text" name="nominal" class="form-control mt-3 mb-2" value="{{ old('nominal') }}" placeholder="Masukkan Nominal Pembayaran" required>
                         <input type="submit" value="Proses" class="btn btn-sm btn-primary w-100">

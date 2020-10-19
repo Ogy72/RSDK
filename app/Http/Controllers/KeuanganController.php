@@ -45,12 +45,11 @@ class KeuanganController extends Controller
     }
 
     //Menampilkan Form Payment
-    public function formPayment($no_rm){
+    public function formPayment($rm_id, $no_rm){
         if(Gate::authorize('isAdminKeuangan')){
-            $pasien = Pasien::find($no_rm);
-            $rm = RekamMedis::where('pasien_no_rm', '=', $no_rm)->get();
+            $rm = RekamMedis::where('id', '=', $rm_id)->first();
             if(empty($rm->keuangan)){
-                return view('data-keuangan.FormPayment', compact('pasien', 'rm'));
+                return view('data-keuangan.FormPayment', compact('no_rm', 'rm', 'rm_id'));
             } else{
                 Alert::error('Tagihan Sudah Lunas', 'Tagihan Tersebut Tidak Dapat Diproses Karena Sudah Lunas');
                 return back();
@@ -69,7 +68,7 @@ class KeuanganController extends Controller
         $tagihan = $request->tagihan;
 
         if($nominal>=$tagihan){
-            $rm = RekamMedis::where('pasien_no_rm', '=', $request->no_rm)->get();
+            $rm = RekamMedis::where('id', '=', $request->rm_id)->get();
             foreach($rm as $rm){
                 $total_t = 0;
                 $total_o = 0;
@@ -108,7 +107,7 @@ class KeuanganController extends Controller
 
                     //Store ke table keuangan
                     Keuangan::create([
-                        'rekam_medis_id' => $rm->id,
+                        'rekam_medis_id' => $request->rm_id,
                         'tgl_bayar' => date('Y-m-d'),
                         'total' => $total
                     ]);
@@ -117,7 +116,7 @@ class KeuanganController extends Controller
             //EndAllForaech
             $kembalian = $nominal-$tagihan;
             $pasien = Pasien::find($request->no_rm);
-            $rm2 = RekamMedis::where('pasien_no_rm', '=', $request->no_rm)->get();
+            $rm2 = RekamMedis::where('id', '=', $request->rm_id)->get();
             $pdf = PDF::loadview('data-keuangan.InvoicePembayaran', compact('pasien', 'rm2', 'nominal', 'tagihan', 'kembalian'));
             return $pdf->stream('Invoice_'.$pasien->no_rm.'.pdf');
         }else{
