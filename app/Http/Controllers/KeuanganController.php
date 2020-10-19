@@ -47,8 +47,9 @@ class KeuanganController extends Controller
     //Menampilkan Form Payment
     public function formPayment($rm_id, $no_rm){
         if(Gate::authorize('isAdminKeuangan')){
-            $rm = RekamMedis::where('id', '=', $rm_id)->first();
-            if(empty($rm->keuangan)){
+            $rm = RekamMedis::where('id', '=', $rm_id)->get();
+            $cek = RekamMedis::where('id', '=', $rm_id)->first();
+            if(empty($cek->keuangan)){
                 return view('data-keuangan.FormPayment', compact('no_rm', 'rm', 'rm_id'));
             } else{
                 Alert::error('Tagihan Sudah Lunas', 'Tagihan Tersebut Tidak Dapat Diproses Karena Sudah Lunas');
